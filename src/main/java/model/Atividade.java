@@ -32,6 +32,8 @@ public class Atividade implements Serializable {
     @ManyToOne
     private Evento evento;
 
+    private boolean autoinscreve;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -54,6 +56,25 @@ public class Atividade implements Serializable {
     
     @ManyToOne
     private Sala sala;
+    
+    @ManyToOne
+    private TipoAtividade tipoAtividade;
+
+    public boolean isAutoinscreve() {
+        return autoinscreve;
+    }
+
+    public void setAutoinscreve(boolean autoinscreve) {
+        this.autoinscreve = autoinscreve;
+    }
+
+    public TipoAtividade getTipoAtividade() {
+        return tipoAtividade;
+    }
+
+    public void setTipoAtividade(TipoAtividade tipoAtividade) {
+        this.tipoAtividade = tipoAtividade;
+    }
 
     public Evento getEvento() {
         return evento;
@@ -121,6 +142,7 @@ public class Atividade implements Serializable {
         x.setPalestrantes(this.palestrantes);
         x.setSala(this.sala);
         x.setEvento(this.evento);
+        x.setAutoinscreve(this.isAutoinscreve());
         return x;
     }
 }

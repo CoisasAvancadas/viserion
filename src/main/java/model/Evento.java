@@ -8,11 +8,13 @@ package model;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -27,6 +29,9 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "tb_evento")
 public class Evento implements Serializable {
+
+    @OneToMany(mappedBy = "evento")
+    private List<InscricaoEvento> inscricaoEventos;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,6 +56,29 @@ public class Evento implements Serializable {
     
     @OneToMany(mappedBy = "evento")
     private Collection<Atividade> atividades;
+    
+    private boolean ativo;
+    
+    @ManyToOne
+    private Instituicao instituicao;
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public Instituicao getInstituicao() {
+        return instituicao;
+    }
+
+    public void setInstituicao(Instituicao instituicao) {
+        this.instituicao = instituicao;
+    }
+    
+    
     
     @Lob
     private byte[] logo;
@@ -129,6 +157,7 @@ public class Evento implements Serializable {
         x.setResponsavel(this.responsavel);
         x.setAtividades(this.atividades);
         x.setLogo(this.logo);
+        x.setAtivo(this.ativo);
         return x;
     }
 }

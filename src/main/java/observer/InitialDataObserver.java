@@ -9,7 +9,6 @@ import br.com.caelum.vraptor.events.VRaptorInitialized;
 import model.Usuario;
 import java.util.Date;
 import javax.persistence.Persistence;
-import model.ContaBancaria;
 
 @Dependent
 public class InitialDataObserver {
@@ -29,11 +28,7 @@ public class InitialDataObserver {
 
             //manager.persist(defaultUser);
             
-            ContaBancaria conta = new ContaBancaria();
-            conta.setAgencia("6666-6");
-            conta.setNumero("66666-6");
             
-            manager.persist(conta);
             
             manager.getTransaction().commit();
 

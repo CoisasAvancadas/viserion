@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -67,7 +68,39 @@ public class Usuario implements Serializable {
     
     @OneToOne(cascade = CascadeType.ALL)
     private Curriculo curriculo;
+        
+    @ManyToOne
+    private PapelSistema papel;
     
+    @OneToMany
+    private Collection<InscricaoEvento> inscricaoEventos;
+    
+    @OneToMany
+    private Collection<InscricaoAtividade> inscricaoAtividades;
+
+    public PapelSistema getPapel() {
+        return papel;
+    }
+
+    public void setPapel(PapelSistema papel) {
+        this.papel = papel;
+    }
+
+    public Collection<InscricaoEvento> getInscricaoEventos() {
+        return inscricaoEventos;
+    }
+
+    public void setInscricaoEventos(Collection<InscricaoEvento> inscricaoEventos) {
+        this.inscricaoEventos = inscricaoEventos;
+    }
+
+    public Collection<InscricaoAtividade> getInscricaoAtividades() {
+        return inscricaoAtividades;
+    }
+
+    public void setInscricaoAtividades(Collection<InscricaoAtividade> inscricaoAtividades) {
+        this.inscricaoAtividades = inscricaoAtividades;
+    }
     
     public int getId() {
         return id;
@@ -180,8 +213,6 @@ public class Usuario implements Serializable {
     public void setAtividades(List<Atividade> atividades) {
         this.atividades = atividades;
     }
-    
-    
 
     @Override
     public Usuario clone() {
@@ -200,6 +231,8 @@ public class Usuario implements Serializable {
         p.setEndereco(this.endereco);
         p.setCurriculo(this.curriculo);
         p.setAtividades(this.atividades);
+        p.setInscricaoAtividades(this.inscricaoAtividades);
+        p.setInscricaoEventos(this.inscricaoEventos);
         return p;
     }
 }

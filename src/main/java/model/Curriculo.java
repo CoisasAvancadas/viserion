@@ -28,8 +28,20 @@ public class Curriculo implements Serializable {
     
     private String titulo;
     
+    private String descricao;
+    
     private File arquivo;
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    
+    
     public int getId() {
         return id;
     }
@@ -59,6 +71,7 @@ public class Curriculo implements Serializable {
         c.setId(this.id);
         c.setTitulo(this.titulo);
         c.setArquivo(this.arquivo);
+        c.setDescricao(this.getDescricao());
         return c;
     }
     
