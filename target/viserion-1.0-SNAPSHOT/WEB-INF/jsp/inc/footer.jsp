@@ -1,17 +1,19 @@
-<%-- 
-    Document   : footer.jsp
-    Created on : Nov 16, 2017, 2:11:05 PM
-    Author     : divensi
---%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
+</div>
+<!-- /.container -->
+
+<br/>
+<br/>
+<hr/>
+<footer>
+    <div class="container">
+        <p class="m-0 text-center text-black">
+            <a href="http://www.apache.org/licenses/LICENSE-2.0">
+                <fmt:message key="licence" /> 
+            </a> | WebApp @2017 UTFPR - Câmpus Medianeira</p>
+    </div>
+</footer>
+</body>
 </html>

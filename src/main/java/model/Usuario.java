@@ -25,6 +25,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "tb_usuario")
@@ -41,6 +43,7 @@ public class Usuario implements Serializable {
     
     @Column(nullable = false)
     @NotNull
+    @Length(min = 3, max = 100)
     private String nome;
     
     @Temporal(TemporalType.DATE)
@@ -49,9 +52,14 @@ public class Usuario implements Serializable {
 
     private String email;
     
+    @NotNull
+    @Length(min = 3, max = 20)
+    @Pattern(regexp = "[a-z0-9_]+", message = "{invalid_user}")
     private String username;
     
-    private String senha;
+    @NotNull
+    @Length(min = 4, max = 20)
+    private String password;
     
     private String cpf;
     
@@ -77,6 +85,14 @@ public class Usuario implements Serializable {
     
     @OneToMany
     private Collection<InscricaoAtividade> inscricaoAtividades;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public PapelSistema getPapel() {
         return papel;
@@ -150,14 +166,6 @@ public class Usuario implements Serializable {
         this.username = username;
     }
 
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
     public String getCpf() {
         return cpf;
     }
@@ -223,7 +231,7 @@ public class Usuario implements Serializable {
         p.setNascimento(this.nascimento);
         p.setEmail(this.email);
         p.setUsername(this.username);
-        p.setSenha(this.senha);
+        p.setPassword(this.password);
         p.setCpf(this.cpf);
         p.setRg(this.rg);
         p.setFoto(this.foto);

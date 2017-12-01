@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import org.eclipse.persistence.sessions.Session;
 
 public abstract class GenericDAO<PK, T> {
 
@@ -53,4 +54,13 @@ public abstract class GenericDAO<PK, T> {
                 .getGenericSuperclass()).getActualTypeArguments()[1];
         return clazz;
     }
+
+    private Session getSession() {
+        return entityManager.unwrap(Session.class);
+    }
+    
+    public void refresh(T obj) {
+        getSession().refreshObject(obj);
+    }
+      
 }
