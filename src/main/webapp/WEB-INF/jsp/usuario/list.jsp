@@ -1,6 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-﻿<%@ include file="/WEB-INF/jsp/inc/header.jsp" %> 
+<%@ include file="/WEB-INF/jsp/inc/header.jsp"%>
 
 
 <div class="page-header">

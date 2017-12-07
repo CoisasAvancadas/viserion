@@ -1,6 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-﻿<%@ include file="/WEB-INF/jsp/inc/header.jsp" %> 
+<%@ include file="/WEB-INF/jsp/inc/header.jsp" %>
 
 <div class="page-header">
     <h1><fmt:message key="usuario" /> <small class="text-muted" style="text-transform: lowercase"><fmt:message key="register" /></small></h1>

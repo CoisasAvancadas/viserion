@@ -4,10 +4,6 @@
 </div>
 <!-- /.container -->
 
-<br/>
-<br/>
-<hr/>
-
 <footer class="page-footer orange">
     <div class="container">
         <div class="row">

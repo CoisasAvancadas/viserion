@@ -9,9 +9,7 @@
         <meta name="reply-to" content="ricardosobjak@utfpr.edu.br"/>
         <meta name="description" content="<fmt:message key="meta.description"/>"/>
         <meta name="keywords" content="educacao, web, desenvolvimento, development, java, opensource"/>
-
         <title>Viserion</title>
-
         <!-- Compiled and minified CSS -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" 
@@ -19,28 +17,22 @@
               crossorigin="anonymous" />        
         <link href="<c:url value="/css/style.css"/>" rel="stylesheet" type="text/css"/>
     </head>
-
     <body>
         <c:set var="path"><c:url value="/"/></c:set>
-
         <c:if test="${not empty param.language}">
             <c:set var="lang" value="${param.language}" scope="session"/>
             <fmt:setLocale value="${param.language}" scope="session"/>
         </c:if>
-        
         <div class="navbar-fixed">
             <nav class="light-blue lighten-1" role="navigation">
                 <div class="nav-wrapper container"><a id="logo-container" href="${path}" class="brand-logo">Viserion</a>
                     <ul class="right hide-on-med-and-down">
-                                  <!-- Dropdown Structure -->
                         <ul id="dropdown1" class="dropdown-content">
                             <li><a href="<c:url value="/person" />"><fmt:message key="menu.person"/> REST</a></li>
                             <li><a href="<c:url value="/pessoa/list" />"><fmt:message key="menu.person"/></a></li>
                             <li class="divider"></li>
-
                             <li><a href="#"><fmt:message key="menu.other"/>1</a></li>
                             <li><a href="#"><fmt:message key="menu.other"/>2</a></li>
-                          
                         </ul>
                         <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>  
 
