@@ -67,21 +67,4 @@
                 <h1 class="display-3">VRaptor-WebAPP</h1>
             </div>
         </div>
-
-        <c:if test="${not empty errors}">
-            <div class="alert alert-danger alert-dismissible fade show" style="z-index: 900">
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
-                <c:forEach items="${errors}" var="error">
-                    <b><fmt:message key="${error.category}"/></b> - ${error.message}<br/>
-                </c:forEach>
-            </div>
-        </c:if>
-
-        <c:if test="${not empty notice}">
-            <div class="alert alert-success alert-dismissible fade show" style="z-index: 900"> 
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
-                ${notice} 
-            </div>
-        </c:if>
-
         <div class="container">
