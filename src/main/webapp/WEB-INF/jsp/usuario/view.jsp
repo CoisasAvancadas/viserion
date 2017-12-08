@@ -10,33 +10,36 @@
 </div>
 
 <div class="row">
-    <form class="col s12" action="${linkTo[UsuarioController].save}" method="POST">
-        <c:if test="${not empty usuario and usuario.id > 0}">
+    <form class="col s12">
         <div class="row">
-            <div class="col s12">
-                <div class="form-group">
-                    <label class="control-label" for="inputId">ID</label>
-                    <input class="form-control" id="inputId" type="text" name="usuario.id" value="${usuario.id}" disabled readonly="readonly" />
-                    <input type="hidden" name="_method" value="PUT" />
-                </div>
-            </div>
-        </div>
-        </c:if>
-        <div class="row">
-            <div class="col s8">
-                <div class="input-field ${not empty errors.from('usuario.nome') ? "has-danger" : ""}">
-                    <label class="" for="inputName"><fmt:message key="usuario.nome" /></label>
-                    <input disabled class="" id="inputName" type="text" name="usuario.nome" value="${usuario.nome}" />
-                </div>
-                <small class="form-control-feedback">${errors.from('usuario.nome')}</small>
-            </div>
-            
             <div class="col s4">
-                <div class="input-field ${not empty errors.from('usuario.ra') ? "has-danger" : ""}">
-                    <label class="" for="inputra"><fmt:message key="usuario.ra" /></label>
-                    <input disabled class="" id="inputra" type="text" name="usuario.ra" value="${usuario.ra}" />
+                <img src="${usuario.foto}" alt="" style="width: 100%">
+            </div>
+            <div class="col s8">
+                <c:if test="${not empty usuario and usuario.id > 0}">
+                <div class="col s12">
+                    <div class="form-group">
+                        <label class="control-label" for="inputId">ID</label>
+                        <input class="form-control" id="inputId" type="text" name="usuario.id" value="${usuario.id}" disabled readonly="readonly" />
+                        <input type="hidden" name="_method" value="PUT" />
+                    </div>
                 </div>
-                <small class="form-control-feedback">${errors.from('usuario.ra')}</small>
+                </c:if>
+                <div class="col s12">
+                    <div class="input-field ${not empty errors.from('usuario.nome') ? "has-danger" : ""}">
+                        <label class="" for="inputName"><fmt:message key="usuario.nome" /></label>
+                        <input disabled class="" id="inputName" type="text" name="usuario.nome" value="${usuario.nome}" />
+                    </div>
+                    <small class="form-control-feedback">${errors.from('usuario.nome')}</small>
+                </div>
+
+                <div class="col s12">
+                    <div class="input-field ${not empty errors.from('usuario.ra') ? "has-danger" : ""}">
+                        <label class="" for="inputra"><fmt:message key="usuario.ra" /></label>
+                        <input disabled class="" id="inputra" type="text" name="usuario.ra" value="${usuario.ra}" />
+                    </div>
+                    <small class="form-control-feedback">${errors.from('usuario.ra')}</small>
+                </div>
             </div>
         </div>
 
@@ -75,19 +78,6 @@
                 <small class="form-control-feedback">${errors.from('usuario.rg')}</small>
             </div>
         </div>
-
-        <div class="file-field input-field">
-            <div class="btn">
-                <span>Selecionar foto</span>
-                <input type="file" name="usuario.foto">
-            </div>
-            <div class="file-path-wrapper">
-                <input disabled class="file-path validate" type="text">
-            </div>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Salvar</button>
-
     </form>
 </div>
 
