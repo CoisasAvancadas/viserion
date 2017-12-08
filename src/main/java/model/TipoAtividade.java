@@ -48,8 +48,18 @@ public class TipoAtividade implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public List<Atividade> getAtividades() {
+        return atividades;
+    }
+
+    public void setAtividades(List<Atividade> atividades) {
+        this.atividades = atividades;
+    }
     
-    
+    public void addAtividades(Atividade atividade) {
+        this.atividades.add(atividade);
+    }
     
     public TipoAtividade clone() {
         TipoAtividade x = new TipoAtividade();

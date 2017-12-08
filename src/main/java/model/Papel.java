@@ -57,7 +57,9 @@ public class Papel implements Serializable {
         this.permissoes = permissoes;
     }
     
-    
+    public void addPermissoes(Permissao permissao) {
+        this.permissoes.add(permissao);
+    }
     
     public Papel clone() {
         Papel x = new Papel();

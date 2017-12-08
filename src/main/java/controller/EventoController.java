@@ -12,11 +12,13 @@ import br.com.caelum.vraptor.validator.Validator;
 import dao.EventoDAO;
 import interceptor.Public;
 import interceptor.UserInfo;
+import java.util.Collection;
 import java.util.List;
 import model.Evento;
 import validation.LoginAvailable;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import model.Atividade;
 
 @Controller
 @Path("/evento")
@@ -62,6 +64,13 @@ public class EventoController {
         
         return eventoDAO.findAll();
     }
+
+    @Get(value = {"/{id}/atividade"})
+    public Collection<Atividade> list(int eventoId) {
+        return eventoDAO.getById(eventoId).getAtividades();
+    }
+
+
     
     @Get(value = {"/{id}"})
     public Evento view(int id) {

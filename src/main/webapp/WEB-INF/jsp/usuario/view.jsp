@@ -92,6 +92,6 @@
         clear: 'Limpar',
         close: 'Fechar',
         closeOnSelect: false, // Close upon selecting a date,
-        format: 'yyyy-mm-dd'
+        format: 'mm/dd/yyyy'
     });
 </script>

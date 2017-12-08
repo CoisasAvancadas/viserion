@@ -139,6 +139,10 @@ public class Evento implements Serializable {
         this.atividades = atividades;
     }
 
+    public void addAtividade(Atividade atividade) {
+        this.atividades.add(atividade);
+    }
+    
     public byte[] getLogo() {
         return logo;
     }

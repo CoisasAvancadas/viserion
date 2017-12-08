@@ -40,8 +40,6 @@ public class Curriculo implements Serializable {
         this.descricao = descricao;
     }
 
-    
-    
     public int getId() {
         return id;
     }

@@ -10,7 +10,7 @@
 </div>
 
 <div class="row">
-    <form class="col s12" action="${linkTo[UsuarioController].save}" method="POST">
+    <form class="col s12" action="${linkTo[UsuarioController].delete}" method="POST">
         <c:if test="${not empty usuario and usuario.id > 0}">
         <div class="row">
             <div class="col s12">
@@ -102,6 +102,6 @@
         clear: 'Limpar',
         close: 'Fechar',
         closeOnSelect: false, // Close upon selecting a date,
-        format: 'yyyy-mm-dd'
+        format: 'mm/dd/yyyy'
     });
 </script>

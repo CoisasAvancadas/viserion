@@ -41,12 +41,10 @@ public class Atividade implements Serializable {
     @NotNull
     private String nome;
     
-    @NotNull
     @Temporal(TemporalType.TIME)
     @Future
     private Calendar horaInicio; 
         
-    @NotNull
     @Temporal(TemporalType.TIME)
     @Future
     private Calendar horaFim; 

@@ -48,6 +48,18 @@ public class Permissao implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public List<Papel> getPapeis() {
+        return papeis;
+    }
+
+    public void setPapeis(List<Papel> papeis) {
+        this.papeis = papeis;
+    }
+    
+    public void addPapeis(Papel papel) {
+        this.papeis.add(papel);
+    }
     
     public Permissao clone() {
         Permissao x = new Permissao();

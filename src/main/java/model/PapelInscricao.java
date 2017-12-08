@@ -25,6 +25,18 @@ public class PapelInscricao extends Papel implements Serializable {
     @ManyToMany(mappedBy = "papelInscricoes")
     private List<InscricaoEvento> inscricaoEventos;
 
+    public List<InscricaoEvento> getInscricaoEventos() {
+        return inscricaoEventos;
+    }
+
+    public void setInscricaoEventos(List<InscricaoEvento> inscricaoEventos) {
+        this.inscricaoEventos = inscricaoEventos;
+    }
+
+    public void addInscricaoEvento(InscricaoEvento inscricaoEvento) {
+        this.inscricaoEventos.add(inscricaoEvento);
+    }
+    
     public PapelInscricao clone() {
         PapelInscricao x = new PapelInscricao();
         x.setId(this.getId());

@@ -71,6 +71,18 @@ public class Instituicao implements Serializable {
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
+
+    public List<Sala> getSalas() {
+        return salas;
+    }
+
+    public void setSalas(List<Sala> salas) {
+        this.salas = salas;
+    }
+    
+    public void addSalas(Sala sala) {
+        this.salas.add(sala);
+    }
     
     public Instituicao clone() {
         Instituicao x = new Instituicao();

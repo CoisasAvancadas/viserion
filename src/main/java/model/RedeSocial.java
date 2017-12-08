@@ -60,5 +60,17 @@ public class RedeSocial implements Serializable {
     public void setUrlBase(String urlBase) {
         this.urlBase = urlBase;
     }
+
+    public Collection<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(Collection<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+    
+    public void addUsuarios(Usuario usuario) {
+        this.usuarios.add(usuario);
+    }
     
 }

@@ -69,6 +69,9 @@ public class InscricaoEvento implements Serializable {
         this.papelInscricoes = papelInscricoes;
     }
 
+    public void addPapelInscricoes(PapelInscricao papel) {
+        this.papelInscricoes.add(papel);
+    }
     
     public InscricaoEvento clone() {
         InscricaoEvento x = new InscricaoEvento();

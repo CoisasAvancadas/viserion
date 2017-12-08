@@ -92,6 +92,9 @@ public class Sala implements Serializable {
         this.atividades = atividades;
     }
     
+    public void addAtividades(Atividade atividade) {
+        this.atividades.add(atividade);
+    }
     
     
     

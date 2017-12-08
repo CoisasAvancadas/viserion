@@ -73,7 +73,7 @@ public class UsuarioController {
         return usuario;
     }
 
-    @IncludeParameters
+    @Post(value = {"/save"})
     public void save(@NotNull @Valid Usuario usuario) {
         //if(person.getNome() == null || person.getNome().trim().equals(""))
         //validator.add(new SimpleMessage("nome", "O nome deve ser preenchido"));

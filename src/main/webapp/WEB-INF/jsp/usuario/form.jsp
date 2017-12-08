@@ -28,7 +28,13 @@
                 </div>
                 <small class="form-control-feedback">${errors.from('usuario.nome')}</small>
             </div>
-            
+            <div class="col s8">
+                <div class="input-field ${not empty errors.from('usuario.username') ? "has-danger" : ""}">
+                    <label class="" for="inputUsername"><fmt:message key="usuario.username" /></label>
+                    <input class="" id="inputUsername" type="text" name="usuario.username" value="${usuario.username}" />
+                </div>
+                <small class="form-control-feedback">${errors.from('usuario.username')}</small>
+            </div>
             <div class="col s4">
                 <div class="input-field ${not empty errors.from('usuario.ra') ? "has-danger" : ""}">
                     <label class="" for="inputra"><fmt:message key="usuario.ra" /></label>
@@ -42,7 +48,7 @@
             <div class="col s6">
                 <div class="input-field ${not empty errors.from('usuario.nascimento') ? "has-danger" : ""}">
                     <label class="" for="inputnascimento"><fmt:message key="usuario.nascimento" /></label>
-                    <input class="datepicker" id="inputnascimento" type="text" name="usuario.nascimento" value="${usuario.nascimento}" />
+                    <input class="datepicker" id="inputnascimento" type="datetime" name="usuario.nascimento" value="${usuario.nascimento}" />
                 </div>
                 <small class="form-control-feedback">${errors.from('usuario.nascimento')}</small>
             </div>
@@ -101,6 +107,6 @@
         clear: 'Limpar',
         close: 'Fechar',
         closeOnSelect: false, // Close upon selecting a date,
-        format: 'yyyy-mm-dd'
+        format: 'mm/dd/yyyy'
     });
 </script>

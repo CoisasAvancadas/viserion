@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -44,7 +45,7 @@ public class Usuario implements Serializable {
     
     @Temporal(TemporalType.DATE)
     @Past
-    private Calendar nascimento;
+    private Date nascimento;
 
     private String email;
     
@@ -106,12 +107,20 @@ public class Usuario implements Serializable {
         this.inscricaoEventos = inscricaoEventos;
     }
 
+    public void addInscricaoEventos(InscricaoEvento inscricaoEvento) {
+        this.inscricaoEventos.add(inscricaoEvento);
+    }
+    
     public Collection<InscricaoAtividade> getInscricaoAtividades() {
         return inscricaoAtividades;
     }
 
     public void setInscricaoAtividades(Collection<InscricaoAtividade> inscricaoAtividades) {
         this.inscricaoAtividades = inscricaoAtividades;
+    }
+    
+    public void addInscricaoAtividades(InscricaoAtividade inscricaoAtividade) {
+        this.inscricaoAtividades.add(inscricaoAtividade);
     }
     
     public int getId() {
@@ -138,11 +147,11 @@ public class Usuario implements Serializable {
         this.ra = ra;
     }
 
-    public Calendar getNascimento() {
+    public Date getNascimento() {
         return nascimento;
     }
 
-    public void setNascimento(Calendar nascimento) {
+    public void setNascimento(Date nascimento) {
         this.nascimento = nascimento;
     }
 
@@ -193,6 +202,10 @@ public class Usuario implements Serializable {
     public void setRedesSociais(Collection<RedeSocial> redesSociais) {
         this.redesSociais = redesSociais;
     }
+    
+    public void addRedesSociais(RedeSocial redeSocial) {
+        this.redesSociais.add(redeSocial);
+    }
 
     public Endereco getEndereco() {
         return endereco;
@@ -216,6 +229,10 @@ public class Usuario implements Serializable {
 
     public void setAtividades(List<Atividade> atividades) {
         this.atividades = atividades;
+    }
+
+
+    public Usuario() {
     }
 
     @Override
