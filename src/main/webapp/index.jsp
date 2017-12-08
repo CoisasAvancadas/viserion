@@ -55,3 +55,4 @@
         </div>
 
 <%@ include file="/WEB-INF/jsp/inc/footer.jsp" %> 
+<%@ include file="/WEB-INF/jsp/inc/scripts.jsp" %> 
