@@ -26,7 +26,10 @@
         <div class="navbar-fixed">
             <nav class="light-blue lighten-1" role="navigation">
                 <div class="nav-wrapper container">
-                    <li href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></li>
+                    <c:if test="${not empty userInfo.usuario}" >
+
+                        <li href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></li>
+                    </c:if>
                     <a id="logo-container" href="${path}" class="brand-logo">Viserion</a>
                     <ul class="right hide-on-med-and-down">
 
