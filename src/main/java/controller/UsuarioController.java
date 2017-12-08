@@ -19,6 +19,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Controller
+@Path("/usuario")
 public class UsuarioController {
 
     private final Result result;
@@ -64,7 +65,7 @@ public class UsuarioController {
      *
      * @param person
      */
-    @Path("/usuario")
+    
     @Post
     @Public
     public void add(@Valid @LoginAvailable Usuario usuario) {
@@ -78,14 +79,19 @@ public class UsuarioController {
         result.redirectTo(HomeController.class).login();
     }
 
-
-    @Get
+    @Get(value = {"/novo", "/editar/{id}"})
+    public Usuario form(int id) {
+        return (id > 0) ? usuarioDAO.getById(id) : null;
+    }
+    
+    @Get(value = {"", "/"})
     public List<Usuario> list() {
+        
         return usuarioDAO.findAll();
     }
-
-    @Get
-    public Usuario form(int id) {
+    
+    @Get(value = {"/{id}"})
+    public Usuario view(int id) {
         return usuarioDAO.getById(id);
     }
 
@@ -109,7 +115,8 @@ public class UsuarioController {
         // Redireciona para a página de listagem
         result.redirectTo(UsuarioController.class).list();
     }
-
+    
+    @Get(value = {"/apagar/{id}"})
     public void delete(int id) {
         result.forwardTo(UsuarioController.class).list();
     }
