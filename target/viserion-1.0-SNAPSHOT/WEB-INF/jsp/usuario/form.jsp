@@ -23,7 +23,7 @@
             </div>
             <small class="form-control-feedback">${errors.from('usuario.nome')}</small>
         </div>
-        
+
         <div class="row">
             <div class="input-field ${not empty errors.from('usuario.ra') ? "has-danger" : ""}">
                 <label class="" for="inputra"><fmt:message key="usuario.ra" /></label>
@@ -31,7 +31,7 @@
             </div>
             <small class="form-control-feedback">${errors.from('usuario.ra')}</small>
         </div>
-        
+
         <div class="row">
             <div class="input-field ${not empty errors.from('usuario.nascimento') ? "has-danger" : ""}">
                 <label class="" for="inputnascimento"><fmt:message key="usuario.nascimento" /></label>
@@ -49,30 +49,23 @@
         </div>
 
         <div class="row">
-            <div class="input-field ${not empty errors.from('usuario.cpf') ? "has-danger" : ""}">
-                <label class="" for="inputcpf"><fmt:message key="usuario.cpf" /></label>
-                <input class="" id="inputcpf" type="text" name="usuario.cpf" value="${usuario.cpf}" />
-            </div>
-            <small class="form-control-feedback">${errors.from('usuario.cpf')}</small>
-        </div>
-        
-        <div class="row">
             <div class="input-field ${not empty errors.from('usuario.rg') ? "has-danger" : ""}">
                 <label class="" for="inputrg"><fmt:message key="usuario.rg" /></label>
                 <input class="" id="inputrg" type="text" name="usuario.rg" value="${usuario.rg}" />
             </div>
             <small class="form-control-feedback">${errors.from('usuario.rg')}</small>
         </div>
-        
-        <div class="row">
-            <div class="input-field ${not empty errors.from('usuario.rg') ? "has-danger" : ""}">
-                <label class="" for="inputrg"><fmt:message key="usuario.rg" /></label>
-                <input class="" id="inputrg" type="text" name="usuario.rg" value="${usuario.rg}" />
+
+        <div class="file-field input-field">
+            <div class="btn">
+                <span>File</span>
+                <input type="file" name="usuario.foto">
             </div>
-            <small class="form-control-feedback">${errors.from('usuario.rg')}</small>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+            </div>
         </div>
-        
-        
+
         <div class="row">
 
             <div class="input-field ${not empty errors.from('usuario.password') ? "has-danger" : ""}">
@@ -83,8 +76,8 @@
 
         </div>
 
-            <button type="submit" class="btn btn-primary">Salvar</button>
-            <button type="reset" class="btn btn-default">Resetar</button>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <button type="reset" class="btn btn-default">Resetar</button>
 
     </form>
 </div>
