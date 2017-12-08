@@ -117,8 +117,15 @@ public class UsuarioController {
     }
     
     @Get(value = {"/apagar/{id}"})
-    public void delete(int id) {
-        result.forwardTo(UsuarioController.class).list();
+    public Usuario delete(int id) {
+        return usuarioDAO.getById(id);
+    }
+    
+    @Post(value = {"/apagar/{id}"})
+    public void delete(Usuario usuario) {
+        usuarioDAO.delete(usuario);
+        
+        result.forwardTo(this.getClass()).list();
     }
     
 }
