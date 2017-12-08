@@ -93,7 +93,7 @@ public class HomeController {
         userInfo.logout();
         // after logging out, we want to be redirected to home index.
         // you can use "this" to redirect to another logic from this controller
-        result.redirectTo(this).login();
+        result.redirectTo("/");
     }
 
     /**

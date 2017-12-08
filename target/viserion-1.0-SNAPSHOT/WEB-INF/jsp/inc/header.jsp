@@ -25,46 +25,27 @@
         </c:if>
         <div class="navbar-fixed">
             <nav class="light-blue lighten-1" role="navigation">
-                <div class="nav-wrapper container"><a id="logo-container" href="${path}" class="brand-logo">Viserion</a>
+                <div class="nav-wrapper container">
+                    <li href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></li>
+                    <a id="logo-container" href="${path}" class="brand-logo">Viserion</a>
                     <ul class="right hide-on-med-and-down">
-                        <ul id="dropdown1" class="dropdown-content">
-                            <li><a href="<c:url value="/person" />"><fmt:message key="menu.person"/> REST</a></li>
-                            <li><a href="<c:url value="/pessoa/list" />"><fmt:message key="menu.person"/></a></li>
-                            <li class="divider"></li>
-                            <li><a href="#"><fmt:message key="menu.other"/>1</a></li>
-                            <li><a href="#"><fmt:message key="menu.other"/>2</a></li>
-                        </ul>
-                        <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>  
 
-                        <li><a href="<c:url value="/home/login" />">login</a></li>
-                        
-                        <ul class="navbar-nav ml-auto">
-                           <li class="nav-item dropdown ${not empty userInfo.usuario ? '' : 'hidden'}">
-                               <a class="nav-link dropdown-toggle" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${userInfo.usuario.username}</a>
-                               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown02">
-                                   <a class="dropdown-item" href="<c:url value="/usuario/${userInfo.usuario.id}" />">Meu Cadastro</a>
-                                   <div class="dropdown-divider"></div>
-                                   <a class="dropdown-item" href="${linkTo[HomeController].logout}"><fmt:message key="logout"/></a>
-                               </div>
-                           </li>
-                       </ul>
-                        
-                    </ul>
+                        <c:if test="${empty userInfo.usuario}" >
+                            <li><a href="<c:url value="/home/login" />">login</a></li>
+                        </c:if>
 
-                    <ul id="nav-mobile" class="side-nav">
-                        <li><a href="<c:url value="/home/login" />">login</a></li>
+                        <c:if test="${not empty userInfo.usuario}" >
+                            <li><a class="dropdown-button" href="#!" data-activates="dropdown1">${userInfo.usuario.username}<i class="material-icons right">arrow_drop_down</i></a></li>
+                            <ul id="dropdown1" class="dropdown-content">
+                                <li><a href="<c:url value="/usuario/${userInfo.usuario.id}" />"><fmt:message key="header.meu_cadastro" /></a></li>
+                                <li><a href="<c:url value="/home/logout" />"><fmt:message key="logout"/></a></li>
+                            </ul>
+                        </c:if>
                     </ul>
-                    
-                    
-                    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
                 </div>
             </nav>
         </div>
-
-
-        <div id="pageTitle" class="jumbotron text-center">
-            <div class="container">
-                <h1 class="display-3">VRaptor-WebAPP</h1>
-            </div>
-        </div>
+        <c:if test="${not empty userInfo.usuario}" >
+            <%@ include file="/WEB-INF/jsp/inc/sidebar.jsp" %>
+        </c:if>
         <div class="container">

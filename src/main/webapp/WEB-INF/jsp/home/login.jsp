@@ -1,25 +1,43 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/inc/header.jsp"%>
 <div class="row">
-    <div class="col-lg-5 mx-auto">
-        <h3>Sign in</h3>
-        <form action="${linkTo[HomeController].login}" method="post" class="form-horizontal">
-            <div class="form-group">
-                <label class="sr-only" for="username"><fmt:message key="usuario.username"/></label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="<fmt:message key="usuario.username"/>"/>
+    <center>
+        <div class="section"></div>
+
+        <div class="container">
+            <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+                <form class="col s12" action="${linkTo[HomeController].login}" method="post" >
+                    <div class='row'>
+                        <div class='col s12'>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input class='validate' type='text' name='username' id='email' />
+                            <label for='email'><fmt:message key="usuario.username"/></label>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input class='validate' type='password' name='password' id='password'  />
+                            <label for='password'><fmt:message key="usuario.password"/></label>
+                        </div>
+                        <label style='float: right;'>
+                            <a class='pink-text' href='#!'><b>Forgot Password?</b></a>
+                        </label>
+                    </div>
+
+                    <br />
+                    <center>
+                        <div class='row'>
+                            <button type='submit' id="submit" name='btn_login' class='col s12 btn btn-large waves-effect indigo'><fmt:message key="send"/></button>
+                        </div>
+                    </center>
+                </form>
             </div>
-            <div class="form-group">
-                <label class="sr-only" for="password"><fmt:message key="usuario.password"/></label>
-                <input type="password" class="form-control" name="password" placeholder="<fmt:message key="usuario.password"/>" />
-                <small class="text-muted"><fmt:message key="user.default"/></small>
-            </div>
-            <div class="form-group pull-right">	
-                <button type="submit" id="submit" class="btn btn-large btn-primary">
-                    <fmt:message key="send"/>
-                </button>
-            </div>	
-        </form>
-    </div>	
+        </div>
+        <a href="<c:url value="/usuario/form" />">Create account</a>
+    </center>
 </div>
 <br/>
 

@@ -1,6 +1,10 @@
 .icon-block {
-  padding: 0 15px;
+    padding: 0 15px;
 }
 .icon-block .material-icons {
-	font-size: inherit;
+    font-size: inherit;
+}
+
+.button-collapse {
+    display: inline;
 }
