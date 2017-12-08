@@ -23,12 +23,13 @@
             <c:set var="lang" value="${param.language}" scope="session"/>
             <fmt:setLocale value="${param.language}" scope="session"/>
         </c:if>
+        <header>
         <div class="navbar-fixed">
             <nav class="light-blue lighten-1" role="navigation">
-                <div class="nav-wrapper container">
+                <div class="nav-wrapper">
                     <c:if test="${not empty userInfo.usuario}" >
 
-                        <li href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></li>
+                        <li href="#" data-activates="slide-out" class="button-collapse" style="cursor: pointer"><i class="material-icons">menu</i></li>
                     </c:if>
                     <a id="logo-container" href="${path}" class="brand-logo">Viserion</a>
                     <ul class="right hide-on-med-and-down">
@@ -48,7 +49,8 @@
                 </div>
             </nav>
         </div>
+        </header>
         <c:if test="${not empty userInfo.usuario}" >
             <%@ include file="/WEB-INF/jsp/inc/sidebar.jsp" %>
         </c:if>
-        <div class="container">
+        <main>

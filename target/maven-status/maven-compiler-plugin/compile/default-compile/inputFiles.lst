@@ -2,16 +2,23 @@ C:\Users\rafae\Documents\Viserion\viserion\src\main\java\dao\AtividadeDAO.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\dao\TipoAtividadeDAO.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\model\InscricaoEvento.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\security\JWTUtil.java
+C:\Users\rafae\Documents\Viserion\viserion\src\main\java\controller\CurriculoController.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\interceptor\UserInfo.java
+C:\Users\rafae\Documents\Viserion\viserion\src\main\java\controller\TipoAtividadeController.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\dao\GenericDAO.java
+C:\Users\rafae\Documents\Viserion\viserion\src\main\java\controller\EnderecoController.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\observer\InitialDataObserver.java
+C:\Users\rafae\Documents\Viserion\viserion\src\main\java\controller\PermissaoController.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\model\PapelInscricao.java
+C:\Users\rafae\Documents\Viserion\viserion\src\main\java\controller\InstituicaoController.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\model\RedeSocial.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\interceptor\Public.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\dao\EventoDAO.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\model\Sala.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\validation\impl\LoginAvailableValidator.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\dao\RedeSocialDAO.java
+C:\Users\rafae\Documents\Viserion\viserion\src\main\java\controller\AtividadeController.java
+C:\Users\rafae\Documents\Viserion\viserion\src\main\java\controller\PapelController.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\controller\api\CurriculoResource.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\model\Evento.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\dao\InstituicaoDAO.java
@@ -31,6 +38,7 @@ C:\Users\rafae\Documents\Viserion\viserion\src\main\java\model\Endereco.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\dao\UsuarioDAO.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\model\Usuario.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\controller\api\PermissaoResource.java
+C:\Users\rafae\Documents\Viserion\viserion\src\main\java\controller\EventoController.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\controller\api\RedeSocialResource.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\controller\api\EnderecoResource.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\dao\PapelSistemaDAO.java
@@ -44,6 +52,7 @@ C:\Users\rafae\Documents\Viserion\viserion\src\main\java\model\Papel.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\controller\api\AtividadeResource.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\util\jpa\EntityManagerProducer.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\controller\api\TipoAtividadeResource.java
+C:\Users\rafae\Documents\Viserion\viserion\src\main\java\controller\RedeSocialController.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\controller\UsuarioController.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\model\Curriculo.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\controller\api\EventoResource.java
@@ -56,3 +65,4 @@ C:\Users\rafae\Documents\Viserion\viserion\src\main\java\model\Permissao.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\model\TipoAtividade.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\annotation\Logado.java
 C:\Users\rafae\Documents\Viserion\viserion\src\main\java\dao\PapelInscricaoDAO.java
+C:\Users\rafae\Documents\Viserion\viserion\src\main\java\controller\SalaController.java

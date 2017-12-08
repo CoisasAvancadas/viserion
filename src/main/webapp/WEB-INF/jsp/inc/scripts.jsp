@@ -10,11 +10,11 @@ crossorigin="anonymous"></script>
 <script src="<c:url value="/js/init.js"/>"></script>
 <c:if test="${not empty errors}">
     <script>
+        <c:forEach items="${errors}" var="error">
         Materialize.toast(
-                <c:forEach items="${errors}" var="error">
-                    "<fmt:message key="${error.category}"/> - ${error.message} \n"
-                </c:forEach>
+            "<fmt:message key="${error.category}"/> - ${error.message} \n"
         , 4000);
+        </c:forEach>
     </script>
 </c:if>
 <c:if test="${not empty notice}">
