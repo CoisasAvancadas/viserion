@@ -41,4 +41,5 @@
 </div>
 <br/>
 
+<%@ include file="/WEB-INF/jsp/inc/scripts.jsp" %>
 <%@ include file="/WEB-INF/jsp/inc/footer.jsp" %> 
