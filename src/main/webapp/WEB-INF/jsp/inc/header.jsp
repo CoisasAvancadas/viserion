@@ -14,7 +14,7 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" 
               integrity="sha256-e22BQKCF7bb/h/4MFJ1a4lTRR2OuAe8Hxa/3tgU5Taw=" 
-              crossorigin="anonymous" />        
+              crossorigin="anonymous" />
         <link href="<c:url value="/css/style.css"/>" rel="stylesheet" type="text/css"/>
     </head>
     <body>
@@ -35,7 +35,7 @@
                         </c:if>
 
                         <c:if test="${not empty userInfo.usuario}" >
-                            <li><a class="dropdown-button" href="#!" data-activates="dropdown1">${userInfo.usuario.username}<i class="material-icons right">arrow_drop_down</i></a></li>
+                            <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Bem Vindo, ${userInfo.usuario.username}<i class="material-icons right">arrow_drop_down</i></a></li>
                             <ul id="dropdown1" class="dropdown-content">
                                 <li><a href="<c:url value="/usuario/${userInfo.usuario.id}" />"><fmt:message key="header.meu_cadastro" /></a></li>
                                 <li><a href="<c:url value="/home/logout" />"><fmt:message key="logout"/></a></li>
