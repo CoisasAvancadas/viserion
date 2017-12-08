@@ -9,31 +9,31 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.interceptor.IncludeParameters;
 import br.com.caelum.vraptor.validator.Validator;
-import dao.UsuarioDAO;
+import dao.RedeSocialDAO;
 import interceptor.Public;
 import interceptor.UserInfo;
 import java.util.List;
-import model.Usuario;
+import model.RedeSocial;
 import validation.LoginAvailable;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Controller
-@Path("/usuario")
-public class UsuarioController {
+@Path("/redeSocial")
+public class RedeSocialController {
 
     private final Result result;
     private final Validator validator;
     private final UserInfo userInfo;
-    private final UsuarioDAO usuarioDAO;
+    private final RedeSocialDAO redeSocialDAO;
 
-    protected UsuarioController() {
+    protected RedeSocialController() {
         this(null, null, null, null);
     }
 
     @Inject
-    public UsuarioController(UsuarioDAO usuarioDAO, UserInfo userInfo, Result result, Validator validator) {
-        this.usuarioDAO = usuarioDAO;
+    public RedeSocialController(RedeSocialDAO redeSocialDAO, UserInfo userInfo, Result result, Validator validator) {
+        this.redeSocialDAO = redeSocialDAO;
         this.result = result;
         this.validator = validator;
         this.userInfo = userInfo;
@@ -41,62 +41,62 @@ public class UsuarioController {
     
     @Post
     @Public
-    public void add(@Valid @LoginAvailable Usuario usuario) {
+    public void add(@Valid @LoginAvailable RedeSocial redeSocial) {
         validator.onErrorUsePageOf(HomeController.class).login();
 
-        usuarioDAO.save(usuario);
+        redeSocialDAO.save(redeSocial);
 
         // you can add objects to result even in redirects. Added objects will
         // survive one more request when redirecting.
-        result.include("notice", "Usuario " + usuario.getNome()+ " adicionado com sucesso");
+        result.include("notice", "RedeSocial " + redeSocial.getNome()+ " adicionado com sucesso");
         result.redirectTo(HomeController.class).login();
     }
 
     @Get(value = {"/novo", "/editar/{id}"})
-    public Usuario form(int id) {
-        return (id > 0) ? usuarioDAO.getById(id) : null;
+    public RedeSocial form(int id) {
+        return (id > 0) ? redeSocialDAO.getById(id) : null;
     }
     
     @Get(value = {"", "/"})
-    public List<Usuario> list() {
+    public List<RedeSocial> list() {
         
-        return usuarioDAO.findAll();
+        return redeSocialDAO.findAll();
     }
     
     @Get(value = {"/{id}"})
-    public Usuario view(int id) {
-        return usuarioDAO.getById(id);
+    public RedeSocial view(int id) {
+        return redeSocialDAO.getById(id);
     }
 
     @Post
-    public Usuario form(Usuario usuario) {
-        return usuario;
+    public RedeSocial form(RedeSocial redeSocial) {
+        return redeSocial;
     }
 
     @IncludeParameters
-    public void save(@NotNull @Valid Usuario usuario) {
+    public void save(@NotNull @Valid RedeSocial redeSocial) {
         //if(person.getNome() == null || person.getNome().trim().equals(""))
         //validator.add(new SimpleMessage("nome", "O nome deve ser preenchido"));
-        validator.onErrorForwardTo(this).form(usuario);
+        validator.onErrorForwardTo(this).form(redeSocial);
 
-        if (usuario.getId() > 0) {
-            usuarioDAO.update(usuario);
+        if (redeSocial.getId() > 0) {
+            redeSocialDAO.update(redeSocial);
         } else {
-            usuarioDAO.save(usuario);
+            redeSocialDAO.save(redeSocial);
         }
 
         // Redireciona para a página de listagem
-        result.redirectTo(UsuarioController.class).list();
+        result.redirectTo(RedeSocialController.class).list();
     }
     
     @Get(value = {"/apagar/{id}"})
-    public Usuario delete(int id) {
-        return usuarioDAO.getById(id);
+    public RedeSocial delete(int id) {
+        return redeSocialDAO.getById(id);
     }
     
     @Post(value = {"/apagar/{id}"})
-    public void delete(Usuario usuario) {
-        usuarioDAO.delete(usuario);
+    public void delete(RedeSocial redeSocial) {
+        redeSocialDAO.delete(redeSocial);
         
         result.forwardTo(this.getClass()).list();
     }

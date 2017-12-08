@@ -9,31 +9,31 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.interceptor.IncludeParameters;
 import br.com.caelum.vraptor.validator.Validator;
-import dao.UsuarioDAO;
+import dao.EnderecoDAO;
 import interceptor.Public;
 import interceptor.UserInfo;
 import java.util.List;
-import model.Usuario;
+import model.Endereco;
 import validation.LoginAvailable;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Controller
-@Path("/usuario")
-public class UsuarioController {
+@Path("/endereco")
+public class EnderecoController {
 
     private final Result result;
     private final Validator validator;
     private final UserInfo userInfo;
-    private final UsuarioDAO usuarioDAO;
+    private final EnderecoDAO enderecoDAO;
 
-    protected UsuarioController() {
+    protected EnderecoController() {
         this(null, null, null, null);
     }
 
     @Inject
-    public UsuarioController(UsuarioDAO usuarioDAO, UserInfo userInfo, Result result, Validator validator) {
-        this.usuarioDAO = usuarioDAO;
+    public EnderecoController(EnderecoDAO enderecoDAO, UserInfo userInfo, Result result, Validator validator) {
+        this.enderecoDAO = enderecoDAO;
         this.result = result;
         this.validator = validator;
         this.userInfo = userInfo;
@@ -41,62 +41,62 @@ public class UsuarioController {
     
     @Post
     @Public
-    public void add(@Valid @LoginAvailable Usuario usuario) {
+    public void add(@Valid @LoginAvailable Endereco endereco) {
         validator.onErrorUsePageOf(HomeController.class).login();
 
-        usuarioDAO.save(usuario);
+        enderecoDAO.save(endereco);
 
         // you can add objects to result even in redirects. Added objects will
         // survive one more request when redirecting.
-        result.include("notice", "Usuario " + usuario.getNome()+ " adicionado com sucesso");
+        result.include("notice", "Endereco adicionado com sucesso");
         result.redirectTo(HomeController.class).login();
     }
 
     @Get(value = {"/novo", "/editar/{id}"})
-    public Usuario form(int id) {
-        return (id > 0) ? usuarioDAO.getById(id) : null;
+    public Endereco form(int id) {
+        return (id > 0) ? enderecoDAO.getById(id) : null;
     }
     
     @Get(value = {"", "/"})
-    public List<Usuario> list() {
+    public List<Endereco> list() {
         
-        return usuarioDAO.findAll();
+        return enderecoDAO.findAll();
     }
     
     @Get(value = {"/{id}"})
-    public Usuario view(int id) {
-        return usuarioDAO.getById(id);
+    public Endereco view(int id) {
+        return enderecoDAO.getById(id);
     }
 
     @Post
-    public Usuario form(Usuario usuario) {
-        return usuario;
+    public Endereco form(Endereco endereco) {
+        return endereco;
     }
 
     @IncludeParameters
-    public void save(@NotNull @Valid Usuario usuario) {
+    public void save(@NotNull @Valid Endereco endereco) {
         //if(person.getNome() == null || person.getNome().trim().equals(""))
         //validator.add(new SimpleMessage("nome", "O nome deve ser preenchido"));
-        validator.onErrorForwardTo(this).form(usuario);
+        validator.onErrorForwardTo(this).form(endereco);
 
-        if (usuario.getId() > 0) {
-            usuarioDAO.update(usuario);
+        if (endereco.getId() > 0) {
+            enderecoDAO.update(endereco);
         } else {
-            usuarioDAO.save(usuario);
+            enderecoDAO.save(endereco);
         }
 
         // Redireciona para a página de listagem
-        result.redirectTo(UsuarioController.class).list();
+        result.redirectTo(EnderecoController.class).list();
     }
     
     @Get(value = {"/apagar/{id}"})
-    public Usuario delete(int id) {
-        return usuarioDAO.getById(id);
+    public Endereco delete(int id) {
+        return enderecoDAO.getById(id);
     }
     
     @Post(value = {"/apagar/{id}"})
-    public void delete(Usuario usuario) {
-        usuarioDAO.delete(usuario);
+    public void delete(Endereco endereco) {
+        enderecoDAO.delete(endereco);
         
         result.forwardTo(this.getClass()).list();
     }

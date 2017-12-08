@@ -9,31 +9,31 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.interceptor.IncludeParameters;
 import br.com.caelum.vraptor.validator.Validator;
-import dao.UsuarioDAO;
+import dao.TipoAtividadeDAO;
 import interceptor.Public;
 import interceptor.UserInfo;
 import java.util.List;
-import model.Usuario;
+import model.TipoAtividade;
 import validation.LoginAvailable;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Controller
-@Path("/usuario")
-public class UsuarioController {
+@Path("/tipoAtividade")
+public class TipoAtividadeController {
 
     private final Result result;
     private final Validator validator;
     private final UserInfo userInfo;
-    private final UsuarioDAO usuarioDAO;
+    private final TipoAtividadeDAO tipoAtividadeDAO;
 
-    protected UsuarioController() {
+    protected TipoAtividadeController() {
         this(null, null, null, null);
     }
 
     @Inject
-    public UsuarioController(UsuarioDAO usuarioDAO, UserInfo userInfo, Result result, Validator validator) {
-        this.usuarioDAO = usuarioDAO;
+    public TipoAtividadeController(TipoAtividadeDAO tipoAtividadeDAO, UserInfo userInfo, Result result, Validator validator) {
+        this.tipoAtividadeDAO = tipoAtividadeDAO;
         this.result = result;
         this.validator = validator;
         this.userInfo = userInfo;
@@ -41,62 +41,62 @@ public class UsuarioController {
     
     @Post
     @Public
-    public void add(@Valid @LoginAvailable Usuario usuario) {
+    public void add(@Valid @LoginAvailable TipoAtividade tipoAtividade) {
         validator.onErrorUsePageOf(HomeController.class).login();
 
-        usuarioDAO.save(usuario);
+        tipoAtividadeDAO.save(tipoAtividade);
 
         // you can add objects to result even in redirects. Added objects will
         // survive one more request when redirecting.
-        result.include("notice", "Usuario " + usuario.getNome()+ " adicionado com sucesso");
+        result.include("notice", "TipoAtividade " + tipoAtividade.getNome()+ " adicionado com sucesso");
         result.redirectTo(HomeController.class).login();
     }
 
     @Get(value = {"/novo", "/editar/{id}"})
-    public Usuario form(int id) {
-        return (id > 0) ? usuarioDAO.getById(id) : null;
+    public TipoAtividade form(int id) {
+        return (id > 0) ? tipoAtividadeDAO.getById(id) : null;
     }
     
     @Get(value = {"", "/"})
-    public List<Usuario> list() {
+    public List<TipoAtividade> list() {
         
-        return usuarioDAO.findAll();
+        return tipoAtividadeDAO.findAll();
     }
     
     @Get(value = {"/{id}"})
-    public Usuario view(int id) {
-        return usuarioDAO.getById(id);
+    public TipoAtividade view(int id) {
+        return tipoAtividadeDAO.getById(id);
     }
 
     @Post
-    public Usuario form(Usuario usuario) {
-        return usuario;
+    public TipoAtividade form(TipoAtividade tipoAtividade) {
+        return tipoAtividade;
     }
 
     @IncludeParameters
-    public void save(@NotNull @Valid Usuario usuario) {
+    public void save(@NotNull @Valid TipoAtividade tipoAtividade) {
         //if(person.getNome() == null || person.getNome().trim().equals(""))
         //validator.add(new SimpleMessage("nome", "O nome deve ser preenchido"));
-        validator.onErrorForwardTo(this).form(usuario);
+        validator.onErrorForwardTo(this).form(tipoAtividade);
 
-        if (usuario.getId() > 0) {
-            usuarioDAO.update(usuario);
+        if (tipoAtividade.getId() > 0) {
+            tipoAtividadeDAO.update(tipoAtividade);
         } else {
-            usuarioDAO.save(usuario);
+            tipoAtividadeDAO.save(tipoAtividade);
         }
 
         // Redireciona para a página de listagem
-        result.redirectTo(UsuarioController.class).list();
+        result.redirectTo(TipoAtividadeController.class).list();
     }
     
     @Get(value = {"/apagar/{id}"})
-    public Usuario delete(int id) {
-        return usuarioDAO.getById(id);
+    public TipoAtividade delete(int id) {
+        return tipoAtividadeDAO.getById(id);
     }
     
     @Post(value = {"/apagar/{id}"})
-    public void delete(Usuario usuario) {
-        usuarioDAO.delete(usuario);
+    public void delete(TipoAtividade tipoAtividade) {
+        tipoAtividadeDAO.delete(tipoAtividade);
         
         result.forwardTo(this.getClass()).list();
     }

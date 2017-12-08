@@ -9,31 +9,31 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.interceptor.IncludeParameters;
 import br.com.caelum.vraptor.validator.Validator;
-import dao.UsuarioDAO;
+import dao.PapelDAO;
 import interceptor.Public;
 import interceptor.UserInfo;
 import java.util.List;
-import model.Usuario;
+import model.Papel;
 import validation.LoginAvailable;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Controller
-@Path("/usuario")
-public class UsuarioController {
+@Path("/papel")
+public class PapelController {
 
     private final Result result;
     private final Validator validator;
     private final UserInfo userInfo;
-    private final UsuarioDAO usuarioDAO;
+    private final PapelDAO papelDAO;
 
-    protected UsuarioController() {
+    protected PapelController() {
         this(null, null, null, null);
     }
 
     @Inject
-    public UsuarioController(UsuarioDAO usuarioDAO, UserInfo userInfo, Result result, Validator validator) {
-        this.usuarioDAO = usuarioDAO;
+    public PapelController(PapelDAO papelDAO, UserInfo userInfo, Result result, Validator validator) {
+        this.papelDAO = papelDAO;
         this.result = result;
         this.validator = validator;
         this.userInfo = userInfo;
@@ -41,62 +41,62 @@ public class UsuarioController {
     
     @Post
     @Public
-    public void add(@Valid @LoginAvailable Usuario usuario) {
+    public void add(@Valid @LoginAvailable Papel papel) {
         validator.onErrorUsePageOf(HomeController.class).login();
 
-        usuarioDAO.save(usuario);
+        papelDAO.save(papel);
 
         // you can add objects to result even in redirects. Added objects will
         // survive one more request when redirecting.
-        result.include("notice", "Usuario " + usuario.getNome()+ " adicionado com sucesso");
+        result.include("notice", "Papel " + papel.getNome()+ " adicionado com sucesso");
         result.redirectTo(HomeController.class).login();
     }
 
     @Get(value = {"/novo", "/editar/{id}"})
-    public Usuario form(int id) {
-        return (id > 0) ? usuarioDAO.getById(id) : null;
+    public Papel form(int id) {
+        return (id > 0) ? papelDAO.getById(id) : null;
     }
     
     @Get(value = {"", "/"})
-    public List<Usuario> list() {
+    public List<Papel> list() {
         
-        return usuarioDAO.findAll();
+        return papelDAO.findAll();
     }
     
     @Get(value = {"/{id}"})
-    public Usuario view(int id) {
-        return usuarioDAO.getById(id);
+    public Papel view(int id) {
+        return papelDAO.getById(id);
     }
 
     @Post
-    public Usuario form(Usuario usuario) {
-        return usuario;
+    public Papel form(Papel papel) {
+        return papel;
     }
 
     @IncludeParameters
-    public void save(@NotNull @Valid Usuario usuario) {
+    public void save(@NotNull @Valid Papel papel) {
         //if(person.getNome() == null || person.getNome().trim().equals(""))
         //validator.add(new SimpleMessage("nome", "O nome deve ser preenchido"));
-        validator.onErrorForwardTo(this).form(usuario);
+        validator.onErrorForwardTo(this).form(papel);
 
-        if (usuario.getId() > 0) {
-            usuarioDAO.update(usuario);
+        if (papel.getId() > 0) {
+            papelDAO.update(papel);
         } else {
-            usuarioDAO.save(usuario);
+            papelDAO.save(papel);
         }
 
         // Redireciona para a página de listagem
-        result.redirectTo(UsuarioController.class).list();
+        result.redirectTo(PapelController.class).list();
     }
     
     @Get(value = {"/apagar/{id}"})
-    public Usuario delete(int id) {
-        return usuarioDAO.getById(id);
+    public Papel delete(int id) {
+        return papelDAO.getById(id);
     }
     
     @Post(value = {"/apagar/{id}"})
-    public void delete(Usuario usuario) {
-        usuarioDAO.delete(usuario);
+    public void delete(Papel papel) {
+        papelDAO.delete(papel);
         
         result.forwardTo(this.getClass()).list();
     }

@@ -9,31 +9,31 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.interceptor.IncludeParameters;
 import br.com.caelum.vraptor.validator.Validator;
-import dao.UsuarioDAO;
+import dao.SalaDAO;
 import interceptor.Public;
 import interceptor.UserInfo;
 import java.util.List;
-import model.Usuario;
+import model.Sala;
 import validation.LoginAvailable;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Controller
-@Path("/usuario")
-public class UsuarioController {
+@Path("/sala")
+public class SalaController {
 
     private final Result result;
     private final Validator validator;
     private final UserInfo userInfo;
-    private final UsuarioDAO usuarioDAO;
+    private final SalaDAO salaDAO;
 
-    protected UsuarioController() {
+    protected SalaController() {
         this(null, null, null, null);
     }
 
     @Inject
-    public UsuarioController(UsuarioDAO usuarioDAO, UserInfo userInfo, Result result, Validator validator) {
-        this.usuarioDAO = usuarioDAO;
+    public SalaController(SalaDAO salaDAO, UserInfo userInfo, Result result, Validator validator) {
+        this.salaDAO = salaDAO;
         this.result = result;
         this.validator = validator;
         this.userInfo = userInfo;
@@ -41,62 +41,62 @@ public class UsuarioController {
     
     @Post
     @Public
-    public void add(@Valid @LoginAvailable Usuario usuario) {
+    public void add(@Valid @LoginAvailable Sala sala) {
         validator.onErrorUsePageOf(HomeController.class).login();
 
-        usuarioDAO.save(usuario);
+        salaDAO.save(sala);
 
         // you can add objects to result even in redirects. Added objects will
         // survive one more request when redirecting.
-        result.include("notice", "Usuario " + usuario.getNome()+ " adicionado com sucesso");
+        result.include("notice", "Sala " + sala.getNome()+ " adicionado com sucesso");
         result.redirectTo(HomeController.class).login();
     }
 
     @Get(value = {"/novo", "/editar/{id}"})
-    public Usuario form(int id) {
-        return (id > 0) ? usuarioDAO.getById(id) : null;
+    public Sala form(int id) {
+        return (id > 0) ? salaDAO.getById(id) : null;
     }
     
     @Get(value = {"", "/"})
-    public List<Usuario> list() {
+    public List<Sala> list() {
         
-        return usuarioDAO.findAll();
+        return salaDAO.findAll();
     }
     
     @Get(value = {"/{id}"})
-    public Usuario view(int id) {
-        return usuarioDAO.getById(id);
+    public Sala view(int id) {
+        return salaDAO.getById(id);
     }
 
     @Post
-    public Usuario form(Usuario usuario) {
-        return usuario;
+    public Sala form(Sala sala) {
+        return sala;
     }
 
     @IncludeParameters
-    public void save(@NotNull @Valid Usuario usuario) {
+    public void save(@NotNull @Valid Sala sala) {
         //if(person.getNome() == null || person.getNome().trim().equals(""))
         //validator.add(new SimpleMessage("nome", "O nome deve ser preenchido"));
-        validator.onErrorForwardTo(this).form(usuario);
+        validator.onErrorForwardTo(this).form(sala);
 
-        if (usuario.getId() > 0) {
-            usuarioDAO.update(usuario);
+        if (sala.getId() > 0) {
+            salaDAO.update(sala);
         } else {
-            usuarioDAO.save(usuario);
+            salaDAO.save(sala);
         }
 
         // Redireciona para a página de listagem
-        result.redirectTo(UsuarioController.class).list();
+        result.redirectTo(SalaController.class).list();
     }
     
     @Get(value = {"/apagar/{id}"})
-    public Usuario delete(int id) {
-        return usuarioDAO.getById(id);
+    public Sala delete(int id) {
+        return salaDAO.getById(id);
     }
     
     @Post(value = {"/apagar/{id}"})
-    public void delete(Usuario usuario) {
-        usuarioDAO.delete(usuario);
+    public void delete(Sala sala) {
+        salaDAO.delete(sala);
         
         result.forwardTo(this.getClass()).list();
     }
