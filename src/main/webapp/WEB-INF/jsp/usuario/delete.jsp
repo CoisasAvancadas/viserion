@@ -4,7 +4,7 @@
 <div class="page-header">
     <div class="row">
         <div class="col 12">
-            <h1><fmt:message key="usuario" /> <small class="text-muted" style="text-transform: lowercase"><fmt:message key="register" /></small></h1>
+            <h1><fmt:message key="usuario.delete" /> <small class="text-muted" style="text-transform: lowercase"><fmt:message key="register" /></small></h1>
         </div>
     </div>
 </div>
@@ -86,7 +86,7 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Salvar</button>
+        <button type="submit" class="btn btn-primary">Apagar</button>
 
     </form>
 </div>

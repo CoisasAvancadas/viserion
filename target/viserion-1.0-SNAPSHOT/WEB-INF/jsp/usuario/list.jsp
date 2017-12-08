@@ -4,42 +4,39 @@
 
 <div class="page-header">
     <h1><fmt:message key="usuario" /> <small class="text-muted" style="text-transform: lowercase"><fmt:message key="list" /></small>
-        <a href="<c:url value="/usuario/form" />" class="btn btn-primary btn-sm"><fmt:message key="add"/></a>
+        <a href="<c:url value="/usuario/novo" />" class="waves-effect waves-light btn"><i class="material-icons left">add</i><fmt:message key="add"/></a>
     </h1>
 </div>
 
 <div class="row">
-    <div class="col-lg-12 mx-auto">
-        <table class="table">
-            <tr>
-                <th><a href="?ordem=id">#</a></th>
-                <th><a href="?ordem=nome"><fmt:message key="usuario.nome"/></a></th>
-                <th><fmt:message key="usuario.username"/></th>
-                <th></th>
-            </tr>
+    <div class="col s12">
+        <table class="stripped highlight">
+            <thead>
+                <tr>
+                    <th><a href="?ordem=id">#</a></th>
+                    <th><a href="?ordem=nome"><fmt:message key="usuario.nome"/></a></th>
+                    <th><fmt:message key="usuario.username"/></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
             <c:forEach var="item" items="${usuarioList}" varStatus="row">
                 <tr>
                     <td>${item.id}</td>
                     <td>${item.nome}</td>
                     <td>${item.username}</td>
                     <td>
-                        <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a class="dropdown-toggle" id="options${item.id}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</a>
-                                <div class="dropdown-menu" aria-labelledby="options${item.id}">
-                                    <form action="<c:url value="/usuario/${item.id}"/>" method="POST">
-                                        <button class="dropdown-item btn btn-link" name="_method" value="GET"><fmt:message key="edit"/></button> 
-                                        <button class="dropdown-item btn btn-link" name="_method" value="DELETE"><fmt:message key="delete"/></button> 
-                                    </form>
-                                </div>
-                            </li>
-                        </ul>
-
+                        <form action="<c:url value="/usuario/${item.id}"/>" method="POST">
+                            <button class="dropdown-item btn btn-link" name="_method" value="GET"><fmt:message key="edit"/></button> 
+                            <button class="dropdown-item btn btn-link" name="_method" value="DELETE"><fmt:message key="delete"/></button> 
+                        </form>
                     </td>
                 </tr>
             </c:forEach>
+            </tbody>
         </table>
     </div>
 </div>
 
 <%@ include file="/WEB-INF/jsp/inc/footer.jsp" %> 
+<%@ include file="/WEB-INF/jsp/inc/scripts.jsp" %> 
