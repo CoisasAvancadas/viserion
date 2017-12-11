@@ -53,4 +53,4 @@
         <c:if test="${not empty userInfo.usuario}" >
             <%@ include file="/WEB-INF/jsp/inc/sidebar.jsp" %>
         </c:if>
-        <main>
+        <div class="container">
