@@ -4,7 +4,9 @@
 .icon-block .material-icons {
     font-size: inherit;
 }
-
 .button-collapse {
     display: inline;
+}
+.container {
+    min-height: 25.8418741vw;
 }
