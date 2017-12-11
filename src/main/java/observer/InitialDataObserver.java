@@ -22,12 +22,13 @@ public class InitialDataObserver {
             manager = factory.createEntityManager();
             manager.getTransaction().begin();
 
-            Usuario defaultUser = new Usuario();
-            defaultUser.setUsername("user");
-            defaultUser.setPassword("user");
-            defaultUser.setNome("User da Silva");
-
-            manager.persist(defaultUser);
+            //Usuario defaultUser = new Usuario();
+            //defaultUser.setUsername("user");
+            //defaultUser.setPassword("user");
+            //defaultUser.setNome("User da Silva");
+            
+            
+            //manager.persist(defaultUser);
             
             manager.getTransaction().commit();
 

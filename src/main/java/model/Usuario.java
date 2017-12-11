@@ -20,6 +20,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
@@ -49,6 +50,7 @@ public class Usuario implements Serializable {
 
     private String email;
     
+    @Column(unique = true)
     @NotNull
     @Length(min = 3, max = 20)
     @Pattern(regexp = "[a-z0-9_]+", message = "{invalid_user}")

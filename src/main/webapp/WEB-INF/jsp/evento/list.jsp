@@ -15,16 +15,17 @@
                 <tr>
                     <th><a href="?ordem=id">#</a></th>
                     <th><a href="?ordem=nome"><fmt:message key="evento.nome"/></a></th>
-                    <th><fmt:message key="evento.username"/></th>
+                    <th><fmt:message key="evento.nome"/></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-            <c:forEach var="item" items="${eventoList}" varStatus="row">
+            <c:forEach var="item" items="${eventos}" varStatus="row">
                 <tr>
                     <td>${item.id}</td>
                     <td>${item.nome}</td>
                     <td>
+                        <a class="dropdown-item btn btn-link" href="<c:url value="/evento/${item.id}/atividade" />"> Atividades</a>
                         <form action="<c:url value="/evento/${item.id}"/>" method="POST">
                             <button class="dropdown-item btn btn-link" name="_method" value="GET"><fmt:message key="edit"/></button> 
                             <button class="dropdown-item btn btn-link" name="_method" value="DELETE"><fmt:message key="delete"/></button> 

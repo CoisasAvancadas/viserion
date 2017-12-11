@@ -6,6 +6,8 @@
 
 package dao;
 
+import java.util.Collection;
+import java.util.List;
 import model.Atividade;
 import javax.enterprise.context.RequestScoped;
 /**
@@ -17,6 +19,10 @@ public class AtividadeDAO extends GenericDAO<Integer, Atividade> {
 
     public AtividadeDAO() {
         super();
+    }
+    
+    public List<Atividade> findAllByEvento(int EventoId) {
+        return entityManager.createQuery((" SELECT a FROM Atividade a WHERE a.evento.id = " + EventoId + " ")).getResultList();
     }
 
 }

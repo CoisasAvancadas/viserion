@@ -6,8 +6,10 @@
 package model;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.Calendar;
 import java.util.Collection;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,7 +33,7 @@ public class Atividade implements Serializable {
 
     @ManyToOne
     private Evento evento;
-
+    
     private boolean autoinscreve;
     
     @Id
@@ -41,13 +43,13 @@ public class Atividade implements Serializable {
     @NotNull
     private String nome;
     
-    @Temporal(TemporalType.TIME)
-    @Future
-    private Calendar horaInicio; 
+    private String horaInicio; 
         
-    @Temporal(TemporalType.TIME)
+    private String horaFim; 
+    
+    @Temporal(TemporalType.DATE)
     @Future
-    private Calendar horaFim; 
+    private Calendar data;
     
     @ManyToMany(mappedBy = "atividades")
     private Collection<Usuario> palestrantes;
@@ -99,19 +101,19 @@ public class Atividade implements Serializable {
         this.nome = nome;
     }
 
-    public Calendar getHoraInicio() {
+    public String getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(Calendar horaInicio) {
+    public void setHoraInicio(String horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public Calendar getHoraFim() {
+    public String getHoraFim() {
         return horaFim;
     }
 
-    public void setHoraFim(Calendar horaFim) {
+    public void setHoraFim(String horaFim) {
         this.horaFim = horaFim;
     }
 

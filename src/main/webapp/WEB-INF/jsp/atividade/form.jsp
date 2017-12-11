@@ -10,7 +10,7 @@
 </div>
 
 <div class="row">
-    <form class="col s12" action="${linkTo[AtividadeController].save}" method="POST">
+    <form class="col s12" action="${linkTo[AtividadeController].save(EventoId)}" method="POST">
         <c:if test="${not empty atividade and atividade.id > 0}">
             <div class="col s12">
                 <div class="form-group">
@@ -21,53 +21,39 @@
             </div>
         </c:if>
         <div class="row">
-            <div class="col s12">
-                <div class="input-field ${not empty errors.from('atividade.nome') ? "has-danger" : ""}">
+            <div class="col s8">
+                <div class="input-field">
                     <label class="" for="inputName"><fmt:message key="atividade.nome" /></label>
                     <input class="" id="inputName" type="text" name="atividade.nome" value="${atividade.nome}" />
                 </div>
                 <small class="form-control-feedback">${errors.from('atividade.nome')}</small>
             </div>
+
+            <div class="col s4">
+                <div class="input-field">
+                    <label class="" for="inputdata"><fmt:message key="atividade.data" /></label>
+                    <input class="datepicker" id="inputdata" name="atividade.data" type="text" value="${atividade.horaFim}" />
+                </div>
+                <small class="form-control-feedback">${errors.from('atividade.data')}</small>
+            </div>
         </div>
 
         <div class="row">
             <div class="col s6">
-                <div class="input-field ${not empty errors.from('atividade.horaInicio') ? "has-danger" : ""}">
-                    <label class="" for="inputhoraInicio-date"><fmt:message key="atividade.horaInicio" /></label>
-                    <input class="datepicker" id="inputhoraInicio-date" type="text" name="atividade.horaInicio-date" value="${atividade.horaInicio}" />
+                <div class="input-field">
+                    <label class="" for="inputhoraInicio"><fmt:message key="atividade.horaInicio" /></label>
+                    <input class="timepicker" id="inputhoraInicio" name="atividade.horaInicio" type="text" value="${atividade.horaInicio}" />
                 </div>
                 <small class="form-control-feedback">${errors.from('atividade.horaInicio')}</small>
             </div>
 
             <div class="col s6">
-                <div class="input-field ${not empty errors.from('atividade.horaInicio') ? "has-danger" : ""}">
-                    <label class="" for="inputhoraInicio-time"><fmt:message key="atividade.horaInicio" /></label>
-                    <input class="timepicker" id="inputhoraInicio-time" type="text" name="atividade.horaInicio-time" value="${atividade.horaInicio}" />
-                </div>
-                <small class="form-control-feedback">${errors.from('atividade.horaInicio')}</small>
-            </div>
-
-            <input type="datetime" id="horaInicio" name="atividade.horaInicio" value="${atividade.horaInicio}" style="display:none">
-        </div>
-
-        <div class="row">
-            <div class="col s6">
-                <div class="input-field ${not empty errors.from('atividade.horaFim') ? "has-danger" : ""}">
-                    <label class="" for="inputhoraFim-date"><fmt:message key="atividade.horaInicio" /></label>
-                    <input class="datepicker" id="inputhoraFim-date" name="atividade.horaFim-date" type="text" value="${atividade.horaFim}" />
+                <div class="input-field">
+                    <label class="" for="inputhoraFim"><fmt:message key="atividade.horaFim" /></label>
+                    <input class="timepicker" id="inputhoraFim" name="atividade.horaFim" type="text" value="${atividade.horaFim}" />
                 </div>
                 <small class="form-control-feedback">${errors.from('atividade.horaFim')}</small>
             </div>
-
-            <div class="col s6">
-                <div class="input-field ${not empty errors.from('atividade.horaFim') ? "has-danger" : ""}">
-                    <label class="" for="inputhoraFim-time"><fmt:message key="atividade.horaFim" /></label>
-                    <input class="timepicker" id="inputhoraFim-time" name="atividade.horaFim-time" type="text" value="${atividade.horaFim}" />
-                </div>
-                <small class="form-control-feedback">${errors.from('atividade.horaFim')}</small>
-            </div>
-
-            <input type="datetime" id="horaFim" name="atividade.horaFim" value="${atividade.horaFim}" style="display:none;">
         </div>
 
         <button type="submit" class="btn btn-primary">Salvar</button>
@@ -86,11 +72,7 @@
         clear: 'Limpar',
         close: 'Fechar',
         closeOnSelect: false, // Close upon selecting a date,
-        format: 'mm/dd/yyyy',
-        onClose: function () {
-            updateHoraInicio();
-            updateHoraFim();
-        }
+        format: 'mm/dd/yyyy'
     });
 
     $('.timepicker').pickatime({
@@ -101,23 +83,11 @@
         cleartext: 'Clear', // text for clear-button
         canceltext: 'Cancel', // Text for cancel-button
         autoclose: false, // automatic close timepicker
-        ampmclickable: true, // make AM PM clickable
-        onClose: function () {
-            updateHoraInicio();
-            updateHoraFim();
-        } //Function for after opening timepicker
+        ampmclickable: true // make AM PM clickable
     });
-    
-    function updateHoraInicio() {
-        document.getElementById("horaInicio").value = 
-            document.getElementById("inputhoraInicio-date").value + "T" + 
-            document.getElementById("inputhoraInicio-time").value;
-    }
-    
-    function updateHoraFim() {
-        document.getElementById("horaFim").value = 
-            document.getElementById("inputhoraFim-date").value + "T" + 
-            document.getElementById("inputhoraFim-time").value;
-    }
+    $(".timepicker").on("change", function() {
+        this.value = this.value + ":00";
+    });
+  
 
 </script>

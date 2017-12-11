@@ -10,38 +10,40 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.interceptor.IncludeParameters;
 import br.com.caelum.vraptor.validator.Validator;
 import dao.EventoDAO;
+import dao.AtividadeDAO;
 import interceptor.Public;
 import interceptor.UserInfo;
-import java.util.Collection;
 import java.util.List;
 import model.Evento;
 import validation.LoginAvailable;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import model.Atividade;
 
 @Controller
-@Path("/evento")
+@Path("/")
 public class EventoController {
 
     private final Result result;
     private final Validator validator;
     private final UserInfo userInfo;
     private final EventoDAO eventoDAO;
+    private final AtividadeDAO atividadeDAO;
 
     protected EventoController() {
-        this(null, null, null, null);
+        this(null, null, null, null, null);
     }
 
     @Inject
-    public EventoController(EventoDAO eventoDAO, UserInfo userInfo, Result result, Validator validator) {
+    public EventoController(EventoDAO eventoDAO, AtividadeDAO atividadeDAO,
+            UserInfo userInfo, Result result, Validator validator) {
         this.eventoDAO = eventoDAO;
+        this.atividadeDAO = atividadeDAO;
         this.result = result;
         this.validator = validator;
         this.userInfo = userInfo;
     }
     
-    @Post
+    @Post(value = "/evento")
     @Public
     public void add(@Valid @LoginAvailable Evento evento) {
         validator.onErrorUsePageOf(HomeController.class).login();
@@ -54,34 +56,28 @@ public class EventoController {
         result.redirectTo(HomeController.class).login();
     }
 
-    @Get(value = {"/novo", "/editar/{id}"})
+    @Get(value = {"/evento/novo", "/evento/editar/{id}"})
     public Evento form(int id) {
         return (id > 0) ? eventoDAO.getById(id) : null;
     }
     
-    @Get(value = {"", "/"})
-    public List<Evento> list() {
-        
-        return eventoDAO.findAll();
+    @Get(value = {"/evento", "/evento/"})
+    public void list() {
+        result.include("eventos", eventoDAO.findAll());
     }
-
-    @Get(value = {"/{id}/atividade"})
-    public Collection<Atividade> list(int eventoId) {
-        return eventoDAO.getById(eventoId).getAtividades();
-    }
-
 
     
-    @Get(value = {"/{id}"})
-    public Evento view(int id) {
-        return eventoDAO.getById(id);
+    @Get(value = {"/evento/{id}"})
+    public void view(int id) {
+        result.include("evento", eventoDAO.getById(id));
     }
 
-    @Post
-    public Evento form(Evento evento) {
-        return evento;
+    @Post("/evento")
+    public void form(Evento evento) {
+        result.include("evento", evento);
     }
 
+    @Path("/evento/save")
     @IncludeParameters
     public void save(@NotNull @Valid Evento evento) {
         //if(person.getNome() == null || person.getNome().trim().equals(""))
@@ -98,15 +94,16 @@ public class EventoController {
         result.redirectTo(EventoController.class).list();
     }
     
-    @Get(value = {"/apagar/{id}"})
+    @Get(value = {"/evento/apagar/{id}"})
     public Evento delete(int id) {
         return eventoDAO.getById(id);
     }
     
-    @Post(value = {"/apagar/{id}"})
+    @Post(value = {"/evento/apagar/{id}"})
     public void delete(Evento evento) {
         eventoDAO.delete(evento);
         
         result.forwardTo(this.getClass()).list();
     }
+
 }
