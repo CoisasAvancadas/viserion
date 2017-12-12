@@ -52,20 +52,19 @@ public class UsuarioController {
         result.redirectTo(HomeController.class).login();
     }
 
-    @Get(value = {"/novo", "/editar/{id}"})
-    public Usuario form(int id) {
-        return (id > 0) ? usuarioDAO.getById(id) : null;
+    @Get(value = {"/novo", "/editar/{usuarioId}"})
+    public Usuario form(int usuarioId) {
+        return (usuarioId > 0) ? usuarioDAO.getById(usuarioId) : null;
     }
     
     @Get(value = {"", "/"})
     public List<Usuario> list() {
-        
         return usuarioDAO.findAll();
     }
     
-    @Get(value = {"/{id}"})
-    public Usuario view(int id) {
-        return usuarioDAO.getById(id);
+    @Get(value = {"/{usuarioId}"})
+    public Usuario view(int usuarioId) {
+        return usuarioDAO.getById(usuarioId);
     }
 
     @Post
@@ -73,7 +72,7 @@ public class UsuarioController {
         return usuario;
     }
 
-    @Post(value = {"/save"})
+    @Path(value = {"/save"})
     public void save(@NotNull @Valid Usuario usuario) {
         //if(person.getNome() == null || person.getNome().trim().equals(""))
         //validator.add(new SimpleMessage("nome", "O nome deve ser preenchido"));
@@ -89,12 +88,12 @@ public class UsuarioController {
         result.redirectTo(UsuarioController.class).list();
     }
     
-    @Get(value = {"/apagar/{id}"})
-    public Usuario delete(int id) {
-        return usuarioDAO.getById(id);
+    @Get(value = {"/apagar/{usuarioId}"})
+    public Usuario delete(int usuarioId) {
+        return usuarioDAO.getById(usuarioId);
     }
     
-    @Post(value = {"/apagar/{id}"})
+    @Post(value = {"/apagar"})
     public void delete(Usuario usuario) {
         usuarioDAO.delete(usuario);
         

@@ -39,7 +39,7 @@
                         </c:if>
 
                         <c:if test="${not empty userInfo.usuario}" >
-                            <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Bem Vindo, ${userInfo.usuario.username}<i class="material-icons right">arrow_drop_down</i></a></li>
+                            <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Bem Vindo, ${userInfo.usuario.nome}<i class="material-icons right">arrow_drop_down</i></a></li>
                             <ul id="dropdown1" class="dropdown-content">
                                 <li><a href="<c:url value="/usuario/${userInfo.usuario.id}" />"><fmt:message key="header.meu_cadastro" /></a></li>
                                 <li><a href="<c:url value="/home/logout" />"><fmt:message key="logout"/></a></li>

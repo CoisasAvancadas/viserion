@@ -9,8 +9,11 @@ import java.io.Serializable;
 import java.sql.Time;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,7 +24,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
-import org.joda.time.LocalTime;
 
 /**
  *
@@ -31,7 +33,7 @@ import org.joda.time.LocalTime;
 @Table(name = "tb_atividade")
 public class Atividade implements Serializable {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     private Evento evento;
     
     private boolean autoinscreve;
@@ -49,7 +51,7 @@ public class Atividade implements Serializable {
     
     @Temporal(TemporalType.DATE)
     @Future
-    private Calendar data;
+    private Date data;
     
     @ManyToMany(mappedBy = "atividades")
     private Collection<Usuario> palestrantes;
@@ -59,6 +61,14 @@ public class Atividade implements Serializable {
     
     @ManyToOne
     private TipoAtividade tipoAtividade;
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
 
     public boolean isAutoinscreve() {
         return autoinscreve;

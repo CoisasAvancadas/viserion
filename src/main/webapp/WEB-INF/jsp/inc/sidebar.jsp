@@ -8,8 +8,8 @@
                 <img src="<c:url value="/images/AHMED.jpg" />"/>
             </div>
             <a href="#!user"><img class="circle" src="<c:url value="/images/AHMED.jpg" />"></a>
-            <a href="#!name"><span class="white-text name">Ahmed</span></a>
-            <a href="#!email"><span class="white-text email">ahmed@hotmail.com</span></a>
+            <a href="#!name"><span class="white-text name">${userInfo.usuario.nome}</span></a>
+            <a href="#!email"><span class="white-text email">${userInfo.usuario.email}</span></a>
         </div>
     </li>
     
@@ -41,7 +41,7 @@
             </li>
             
             <li><div class="divider"></div></li>
-            
+            <!--
             <li class="bold"><a class="collapsible-header waves-effect waves-teal"><i class="material-icons">assignment_turned_in</i>Atividade</a>
                 <div class="collapsible-body">
                     <ul>
@@ -49,7 +49,7 @@
                         <li><a href="<c:url value="/atividade/novo" />"><i class="material-icons">add_box</i>Cadastrar</a></li>
                     </ul>
                 </div>
-            </li>
+            </li> -->
             <li class="bold"><a class="collapsible-header waves-effect waves-teal"><i class="material-icons">chrome_reader_mode</i>Tipo Atividade</a>
                 <div class="collapsible-body">
                     <ul>
@@ -66,7 +66,7 @@
                         <li><a href="<c:url value="/instituicao/novo" />"><i class="material-icons">add_box</i>Cadastrar</a></li>
                     </ul>
                 </div>
-            </li>
+            </li> <!--
             <li class="bold"><a class="collapsible-header waves-effect waves-teal"><i class="material-icons">event_seat</i>Salas</a>
                 <div class="collapsible-body">
                     <ul>
@@ -74,7 +74,8 @@
                         <li><a href="<c:url value="/sala/novo" />"><i class="material-icons">add_box</i>Cadastrar</a></li>
                     </ul>
                 </div>
-            </li>
+            </li> -->
+            
             <li class="bold"><a class="collapsible-header waves-effect waves-teal"><i class="material-icons">event</i>Eventos</a>
                 <div class="collapsible-body">
                     <ul>

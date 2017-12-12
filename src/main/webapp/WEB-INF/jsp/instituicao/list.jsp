@@ -16,6 +16,8 @@
                     <th><a href="?ordem=id">#</a></th>
                     <th><a href="?ordem=nome"><fmt:message key="instituicao.nome"/></a></th>
                     <th><fmt:message key="instituicao.cnpj"/></th>
+                    <th><fmt:message key="salas"/></th>
+                    <th><fmt:message key="eventos"/></th>
                     <th></th>
                 </tr>
             </thead>
@@ -25,11 +27,11 @@
                     <td>${item.id}</td>
                     <td>${item.nome}</td>
                     <td>${item.cnpj}</td>
+                    <td><a class="dropdown-item btn btn-link" href="<c:url value="/instituicao/${item.id}/sala"/>"><fmt:message key="salas"/></a></td>
+                    <td><a class="dropdown-item btn btn-link" href="<c:url value="/instituicao/${item.id}/evento"/>"><fmt:message key="eventos"/></a></td>
                     <td>
-                        <form action="<c:url value="/instituicao/${item.id}"/>" method="POST">
-                            <button class="dropdown-item btn btn-link" name="_method" value="GET"><fmt:message key="edit"/></button> 
-                            <button class="dropdown-item btn btn-link" name="_method" value="DELETE"><fmt:message key="delete"/></button> 
-                        </form>
+                        <a class="dropdown-item btn btn-link" href="<c:url value="/instituicao/editar/${item.id}"/>"><fmt:message key="edit"/></a> 
+                        <a class="dropdown-item btn btn-link" href="<c:url value="/instituicao/apagar/${item.id}"/>"><fmt:message key="delete"/></a> 
                     </td>
                 </tr>
             </c:forEach>

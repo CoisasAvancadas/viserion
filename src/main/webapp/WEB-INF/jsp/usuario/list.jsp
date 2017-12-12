@@ -26,10 +26,9 @@
                     <td>${item.nome}</td>
                     <td>${item.username}</td>
                     <td>
-                        <form action="<c:url value="/usuario/${item.id}"/>" method="POST">
-                            <button class="dropdown-item btn btn-link" name="_method" value="GET"><fmt:message key="edit"/></button> 
-                            <button class="dropdown-item btn btn-link" name="_method" value="DELETE"><fmt:message key="delete"/></button> 
-                        </form>
+                        <a href="<c:url value="/usuario/${item.id}"/>" class="dropdown-item btn btn-link" name="_method" value="GET"><fmt:message key="view"/></a> 
+                        <a href="<c:url value="/usuario/editar/${item.id}"/>" class="dropdown-item btn btn-link" name="_method" value="GET"><fmt:message key="edit"/></a> 
+                        <a href="<c:url value="/usuario/apagar/${item.id}"/>" class="dropdown-item btn btn-link" name="_method" value="DELETE"><fmt:message key="delete"/></a> 
                     </td>
                 </tr>
             </c:forEach>

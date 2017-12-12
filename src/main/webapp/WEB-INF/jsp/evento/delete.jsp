@@ -11,7 +11,7 @@
 
 <div class="row">
     <form class="col s12" action="${linkTo[EventoController].delete}" method="POST">
-        <c:if test="${not empty usuario and usuario.id > 0}">
+        <c:if test="${not empty evento and evento.id > 0}">
             <div class="row">
                 <div class="col s12">
                     <div class="form-group">

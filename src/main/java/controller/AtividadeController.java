@@ -9,13 +9,12 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.interceptor.IncludeParameters;
+import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import dao.AtividadeDAO;
 import dao.EventoDAO;
 import interceptor.Public;
 import interceptor.UserInfo;
-import java.util.Collection;
-import java.util.List;
 import model.Atividade;
 import validation.LoginAvailable;
 import javax.validation.Valid;
@@ -48,14 +47,9 @@ public class AtividadeController {
     @Post(value = {"/evento/{EventoId}/atividade/add"})
     @Public
     public void add(@Valid @LoginAvailable Atividade atividade) {
-        validator.onErrorUsePageOf(HomeController.class).login();
-
         atividadeDAO.save(atividade);
 
-        // you can add objects to result even in redirects. Added objects will
-        // survive one more request when redirecting.
         result.include("notice", "Atividade " + atividade.getNome()+ " adicionado com sucesso");
-        result.redirectTo(HomeController.class).login();
     }
 
     @Get(value = {"/evento/{EventoId}/atividade/novo", "/evento/{EventoId}/atividade/editar/{AtividadeId}"})
@@ -68,7 +62,6 @@ public class AtividadeController {
     @Get(value = {"/evento/{EventoId}/atividade"})
     public void list(int EventoId) {
         Evento evento = eventoDAO.getById(EventoId);
-
         result.include("evento", evento);
     }
     
@@ -83,34 +76,34 @@ public class AtividadeController {
     }
 
     @IncludeParameters
-    @Path(value = {"/evento/{EventoId}/atividade/save"})
+    @Post(value = {"/evento/{EventoId}/atividade/save"})
     public void save(int EventoId, @NotNull @Valid Atividade atividade) {
         //if(person.getNome() == null || person.getNome().trim().equals(""))
         //validator.add(new SimpleMessage("nome", "O nome deve ser preenchido"));
         validator.onErrorForwardTo(this).form(atividade);
+        
+        atividade.setEvento(eventoDAO.getById(EventoId));
 
         if (atividade.getId() > 0) {
             atividadeDAO.update(atividade);
         } else {
-            Evento evento = eventoDAO.getById(EventoId);
-            evento.addAtividade(atividade);
-            eventoDAO.update(evento);
-            //atividadeDAO.save(atividade);
+            atividadeDAO.save(atividade);
         }
+        
+        result.include("notice", "Atividade " + atividade.getNome()+ " salvo com sucesso");
 
         // Redireciona para a página de listagem
         result.redirectTo(AtividadeController.class).list(EventoId);
     }
     
-    @Get(value = {"/evento/{EventoId}/atividade/apagar/{id}"})
-    public Atividade delete(int id) {
-        return atividadeDAO.getById(id);
+    @Get(value = {"/evento/{EventoId}/atividade/apagar/{AtividadeId}"})
+    public Atividade delete(int AtividadeId) {
+        return atividadeDAO.getById(AtividadeId);
     }
     
-    @Post(value = {"/evento/{EventoId}/atividade/apagar/{id}"})
+    @Post(value = {"/evento/{EventoId}/atividade/apagar/{AtividadeId}"})
     public void delete(int EventoId, Atividade atividade) {
         atividadeDAO.delete(atividade);
-        
         result.forwardTo(this.getClass()).list(EventoId);
     }
 }

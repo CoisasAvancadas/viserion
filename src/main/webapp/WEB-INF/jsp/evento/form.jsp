@@ -11,16 +11,8 @@
 
 <div class="row">
     <form class="col s12" action="${linkTo[EventoController].save}" method="POST">
-        <c:if test="${not empty usuario and usuario.id > 0}">
-            <div class="row">
-                <div class="col s12">
-                    <div class="form-group">
-                        <label class="control-label" for="inputId">ID</label>
-                        <input class="form-control" id="inputId" type="text" name="evento.id" value="${evento.id}" disabled readonly="readonly" />
-                        <input type="hidden" name="_method" value="PUT" />
-                    </div>
-                </div>
-            </div>
+        <c:if test="${not empty evento and evento.id > 0}">
+            <input id="inputId" type="hidden" name="evento.id" value="${evento.id}" />
         </c:if>
         <div class="row">
             <div class="col s8">
@@ -44,7 +36,7 @@
             <div class="col s6">
                 <div class="input-field ${not empty errors.from('evento.dataInicio') ? "has-danger" : ""}">
                     <label class="" for="inputdataInicio"><fmt:message key="evento.dataInicio" /></label>
-                    <input class="datepicker" id="inputdataInicio" type="datetime" name="evento.dataInicio" value="${evento.dataInicio}" />
+                    <input class="datepicker" id="inputdataInicio" type="text" name="evento.dataInicio" value="${evento.dataInicio}" />
                 </div>
                 <small class="form-control-feedback">${errors.from('evento.dataInicio')}</small>
             </div>
@@ -52,11 +44,36 @@
             <div class="col s6">
                 <div class="input-field ${not empty errors.from('evento.dataFim') ? "has-danger" : ""}">
                     <label class="" for="inputdataFim"><fmt:message key="evento.dataFim" /></label>
-                    <input class="datepicker" id="inputdataFim" type="datetime" name="evento.dataFim" value="${evento.dataFim}" />
+                    <input class="datepicker" id="inputdataFim" type="text" name="evento.dataFim" value="${evento.dataFim}" />
                 </div>
                 <small class="form-control-feedback">${errors.from('evento.dataFim')}</small>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col s6">
+                <div class="input-field ${not empty errors.from('evento.instituicao.id') ? "has-danger" : ""}">
+                    <select name="evento.instituicao.id">
+                        <c:forEach items="${instituicoes}" var="instituicao">  
+                            <option value="${instituicao.id}">${instituicao.nome}</option>
+                        </c:forEach>  
+                    </select>
+                    <label>Materialize Select</label>
+                </div>
+                <small class="form-control-feedback">${errors.from('evento.instituicao')}</small>
+            </div>
+            <div class="col s6">
+                <div class="switch">
+                    <br>
+                    <label>
+                        <fmt:message key="evento.ativo" />
+                        <input type="checkbox" name="evento.ativo">
+                        <span class="lever"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
 
         <button type="submit" class="btn btn-primary">Salvar</button>
         <button type="reset" class="btn btn-flat">Resetar</button>
@@ -74,11 +91,7 @@
         clear: 'Limpar',
         close: 'Fechar',
         closeOnSelect: false, // Close upon selecting a date,
-        format: 'mm/dd/yyyy',
-        onClose: function () {
-            updateHoraInicio();
-            updateHoraFim();
-        }
+        format: 'mm/dd/yyyy'
     });
 
     $('.timepicker').pickatime({
@@ -89,11 +102,10 @@
         cleartext: 'Clear', // text for clear-button
         canceltext: 'Cancel', // Text for cancel-button
         autoclose: false, // automatic close timepicker
-        ampmclickable: true, // make AM PM clickable
-        onClose: function () {
-            updateHoraInicio();
-            updateHoraFim();
-        } //Function for after opening timepicker
+        ampmclickable: true // make AM PM clickable
+    });
+    $(document).ready(function () {
+        $('select').material_select();
     });
 
 </script>

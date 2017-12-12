@@ -9,6 +9,7 @@ import br.com.caelum.vraptor.events.VRaptorInitialized;
 import model.Usuario;
 import java.util.Date;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 @Dependent
 public class InitialDataObserver {
@@ -22,15 +23,18 @@ public class InitialDataObserver {
             manager = factory.createEntityManager();
             manager.getTransaction().begin();
 
-            //Usuario defaultUser = new Usuario();
-            //defaultUser.setUsername("user");
-            //defaultUser.setPassword("user");
-            //defaultUser.setNome("User da Silva");
+            Query query = manager.createQuery("SELECT COUNT(u) FROM Usuario u");
+            long userCount = (Long)query.getSingleResult();
             
-            
-            //manager.persist(defaultUser);
-            
-            manager.getTransaction().commit();
+            if (userCount < 1) {
+                Usuario defaultUser = new Usuario();
+                defaultUser.setUsername("admin");
+                defaultUser.setPassword("admin");
+                defaultUser.setEmail("djcleitonrasta@hotmail.com.br");
+                defaultUser.setNome("Edivaldo Pericleiton Rasta");
+                manager.persist(defaultUser);
+                manager.getTransaction().commit();
+            }
 
         } finally {
             if (manager != null && manager.isOpen()) {

@@ -12,13 +12,7 @@
 <div class="row">
     <form class="col s12" action="${linkTo[InstituicaoController].save}" method="POST">
         <c:if test="${not empty instituicao and instituicao.id > 0}">
-            <div class="col s12">
-                <div class="form-group">
-                    <label class="control-label" for="inputId">ID</label>
-                    <input class="form-control" id="inputId" type="text" name="instituicao.id" value="${instituicao.id}" disabled readonly="readonly" />
-                    <input type="hidden" name="_method" value="PUT" />
-                </div>
-            </div>
+            <input id="inputId" type="hidden" name="instituicao.id" value="${instituicao.id}" />
         </c:if>
         <div class="col s12">
             <div class="input-field ${not empty errors.from('instituicao.nome') ? "has-danger" : ""}">

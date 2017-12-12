@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -39,7 +40,6 @@ public class Usuario implements Serializable {
     
     private int ra;
     
-    @Column(nullable = false)
     @NotNull
     @Length(min = 3, max = 100)
     private String nome;
@@ -48,6 +48,7 @@ public class Usuario implements Serializable {
     @Past
     private Date nascimento;
 
+    @Column(unique = true)
     private String email;
     
     @Column(unique = true)
@@ -57,15 +58,14 @@ public class Usuario implements Serializable {
     private String username;
     
     @NotNull
-    @Length(min = 4, max = 20)
+    @Length(min = 4, max = 100)
     private String password;
     
     private String cpf;
     
     private String rg;
     
-    @Lob
-    private byte[] foto;
+    private Blob foto;
     
     @ManyToMany
     private Collection<RedeSocial> redesSociais = new ArrayList<>();
@@ -189,11 +189,11 @@ public class Usuario implements Serializable {
         this.rg = rg;
     }
 
-    public byte[] getFoto() {
+    public Blob getFoto() {
         return foto;
     }
 
-    public void setFoto(byte[] foto) {
+    public void setFoto(Blob foto) {
         this.foto = foto;
     }
 
@@ -233,7 +233,6 @@ public class Usuario implements Serializable {
         this.atividades = atividades;
     }
 
-
     public Usuario() {
     }
 
@@ -258,4 +257,6 @@ public class Usuario implements Serializable {
         p.setInscricaoEventos(this.inscricaoEventos);
         return p;
     }
+    
+    
 }

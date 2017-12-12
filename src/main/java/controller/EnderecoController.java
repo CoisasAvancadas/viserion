@@ -62,6 +62,7 @@ public class EnderecoController {
         
         return enderecoDAO.findAll();
     }
+
     
     @Get(value = {"/{id}"})
     public Endereco view(int id) {

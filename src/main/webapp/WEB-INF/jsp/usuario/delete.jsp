@@ -10,17 +10,16 @@
 </div>
 
 <div class="row">
-    <form class="col s12" action="${linkTo[UsuarioController].delete}" method="POST">
+    <form class="col s12" action="<c:url value="/usuario/apagar"/>" method="POST">
         <c:if test="${not empty usuario and usuario.id > 0}">
-        <div class="row">
-            <div class="col s12">
-                <div class="form-group">
-                    <label class="control-label" for="inputId">ID</label>
-                    <input class="form-control" id="inputId" type="text" name="usuario.id" value="${usuario.id}" disabled readonly="readonly" />
-                    <input type="hidden" name="_method" value="PUT" />
+            <div class="row">
+                <div class="col s12">
+                    <div class="form-group">
+                        <label class="control-label" for="inputId">ID</label>
+                        <input class="form-control" id="inputId" type="text" name="usuario.id" value="${usuario.id}" disabled readonly="readonly" />
+                    </div>
                 </div>
             </div>
-        </div>
         </c:if>
         <div class="row">
             <div class="col s8">

@@ -19,7 +19,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Controller
-@Path("/tipoAtividade")
+@Path("/tipoatividade")
 public class TipoAtividadeController {
 
     private final Result result;
@@ -48,13 +48,13 @@ public class TipoAtividadeController {
 
         // you can add objects to result even in redirects. Added objects will
         // survive one more request when redirecting.
-        result.include("notice", "TipoAtividade " + tipoAtividade.getNome()+ " adicionado com sucesso");
+        result.include("notice", "Tipo de Atividade " + tipoAtividade.getNome()+ " adicionado com sucesso");
         result.redirectTo(HomeController.class).login();
     }
 
-    @Get(value = {"/novo", "/editar/{id}"})
-    public TipoAtividade form(int id) {
-        return (id > 0) ? tipoAtividadeDAO.getById(id) : null;
+    @Get(value = {"/novo", "/editar/{tipoAtividadeId}"})
+    public TipoAtividade form(int tipoAtividadeId) {
+        return (tipoAtividadeId > 0) ? tipoAtividadeDAO.getById(tipoAtividadeId) : null;
     }
     
     @Get(value = {"", "/"})
@@ -63,9 +63,9 @@ public class TipoAtividadeController {
         return tipoAtividadeDAO.findAll();
     }
     
-    @Get(value = {"/{id}"})
-    public TipoAtividade view(int id) {
-        return tipoAtividadeDAO.getById(id);
+    @Get(value = {"/{tipoAtividadeId}"})
+    public TipoAtividade view(int tipoAtividadeId) {
+        return tipoAtividadeDAO.getById(tipoAtividadeId);
     }
 
     @Post
@@ -89,14 +89,14 @@ public class TipoAtividadeController {
         result.redirectTo(TipoAtividadeController.class).list();
     }
     
-    @Get(value = {"/apagar/{id}"})
-    public TipoAtividade delete(int id) {
-        return tipoAtividadeDAO.getById(id);
+    @Get(value = {"/apagar/{tipoAtividadeId}"})
+    public TipoAtividade delete(int tipoAtividadeId) {
+        return tipoAtividadeDAO.getById(tipoAtividadeId);
     }
     
-    @Post(value = {"/apagar/{id}"})
-    public void delete(TipoAtividade tipoAtividade) {
-        tipoAtividadeDAO.delete(tipoAtividade);
+    @Post(value = {"/apagar/{tipoAtividadeId}"})
+    public void delete(int tipoAtividadeId, TipoAtividade tipoAtividade) {
+        tipoAtividadeDAO.delete(tipoAtividadeDAO.getById(tipoAtividadeId));
         
         result.forwardTo(this.getClass()).list();
     }

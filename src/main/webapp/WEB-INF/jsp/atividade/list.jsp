@@ -14,7 +14,6 @@
                 <tr>
                     <th><a href="?ordem=id">#</a></th>
                     <th><a href="?ordem=nome"><fmt:message key="atividade.nome"/></a></th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -22,12 +21,9 @@
                 <tr>
                     <td>${item.id}</td>
                     <td>${item.nome}</td>
-                    <td></td>
                     <td>
-                        <form action="<c:url value="/evento/${evento.id}/atividade/${item.id}"/>" method="POST">
-                            <button class="dropdown-item btn btn-link" name="_method" value="GET"><fmt:message key="edit"/></button> 
-                            <button class="dropdown-item btn btn-link" name="_method" value="DELETE"><fmt:message key="delete"/></button> 
-                        </form>
+                        <a href="<c:url value="/evento/${evento.id}/atividade/editar/${item.id}"/>" class="dropdown-item btn btn-link"><fmt:message key="edit"/></a> 
+                        <a href="<c:url value="/evento/${evento.id}/atividade/apagar/${item.id}"/>" class="dropdown-item btn btn-link"><fmt:message key="delete"/></a> 
                     </td>
                 </tr>
             </c:forEach>

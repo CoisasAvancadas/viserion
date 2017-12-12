@@ -19,7 +19,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Controller
-@Path("/instituicao")
+@Path("/")
 public class InstituicaoController {
 
     private final Result result;
@@ -39,7 +39,7 @@ public class InstituicaoController {
         this.userInfo = userInfo;
     }
     
-    @Post
+    @Post(value = {"/instituicao/add"})
     @Public
     public void add(@Valid @LoginAvailable Instituicao instituicao) {
         validator.onErrorUsePageOf(HomeController.class).login();
@@ -52,28 +52,29 @@ public class InstituicaoController {
         result.redirectTo(HomeController.class).login();
     }
 
-    @Get(value = {"/novo", "/editar/{id}"})
-    public Instituicao form(int id) {
-        return (id > 0) ? instituicaoDAO.getById(id) : null;
+    @Get(value = {"/instituicao/novo", "/instituicao/editar/{instituicaoId}"})
+    public Instituicao form(int instituicaoId) {
+        return (instituicaoId > 0) ? instituicaoDAO.getById(instituicaoId) : null;
     }
     
-    @Get(value = {"", "/"})
+    @Get(value = {"/instituicao"})
     public List<Instituicao> list() {
         
         return instituicaoDAO.findAll();
     }
     
-    @Get(value = {"/{id}"})
-    public Instituicao view(int id) {
-        return instituicaoDAO.getById(id);
+    @Get(value = {"/instituicao/{instituicaoId}"})
+    public Instituicao view(int instituicaoId) {
+        return instituicaoDAO.getById(instituicaoId);
     }
 
-    @Post
+    @Post(value = {"/instituicao"})
     public Instituicao form(Instituicao instituicao) {
         return instituicao;
     }
 
     @IncludeParameters
+    @Path(value = {"/instituicao/save"})
     public void save(@NotNull @Valid Instituicao instituicao) {
         //if(person.getNome() == null || person.getNome().trim().equals(""))
         //validator.add(new SimpleMessage("nome", "O nome deve ser preenchido"));
@@ -89,12 +90,12 @@ public class InstituicaoController {
         result.redirectTo(InstituicaoController.class).list();
     }
     
-    @Get(value = {"/apagar/{id}"})
-    public Instituicao delete(int id) {
-        return instituicaoDAO.getById(id);
+    @Get(value = {"/instituicao/apagar/{instituicaoId}"})
+    public Instituicao delete(int instituicaoId) {
+        return instituicaoDAO.getById(instituicaoId);
     }
     
-    @Post(value = {"/apagar/{id}"})
+    @Post(value = {"/instituicao/apagar/{instituicaoId}"})
     public void delete(Instituicao instituicao) {
         instituicaoDAO.delete(instituicao);
         

@@ -12,13 +12,7 @@
 <div class="row">
     <form class="col s12" action="${linkTo[AtividadeController].save(EventoId)}" method="POST">
         <c:if test="${not empty atividade and atividade.id > 0}">
-            <div class="col s12">
-                <div class="form-group">
-                    <label class="control-label" for="inputId">ID</label>
-                    <input class="form-control" id="inputId" type="text" name="atividade.id" value="${atividade.id}" disabled readonly="readonly" />
-                    <input type="hidden" name="_method" value="PUT" />
-                </div>
-            </div>
+            <input id="inputId" type="hidden" name="atividade.id" value="${atividade.id}" />
         </c:if>
         <div class="row">
             <div class="col s8">
@@ -32,7 +26,7 @@
             <div class="col s4">
                 <div class="input-field">
                     <label class="" for="inputdata"><fmt:message key="atividade.data" /></label>
-                    <input class="datepicker" id="inputdata" name="atividade.data" type="text" value="${atividade.horaFim}" />
+                    <input class="datepicker" id="inputdata" name="atividade.data" type="text" value="${atividade.data}" />
                 </div>
                 <small class="form-control-feedback">${errors.from('atividade.data')}</small>
             </div>
@@ -55,6 +49,8 @@
                 <small class="form-control-feedback">${errors.from('atividade.horaFim')}</small>
             </div>
         </div>
+        
+        <input class="" id="inputEventoId" name="atividade.evento.id" type="hidden" value="${EventoId}" />
 
         <button type="submit" class="btn btn-primary">Salvar</button>
         <button type="reset" class="btn btn-flat">Resetar</button>

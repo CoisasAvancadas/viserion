@@ -9,6 +9,7 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.interceptor.IncludeParameters;
 import br.com.caelum.vraptor.validator.Validator;
+import dao.InstituicaoDAO;
 import dao.SalaDAO;
 import interceptor.Public;
 import interceptor.UserInfo;
@@ -17,22 +18,25 @@ import model.Sala;
 import validation.LoginAvailable;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import model.Instituicao;
 
 @Controller
-@Path("/sala")
+@Path("/")
 public class SalaController {
 
     private final Result result;
     private final Validator validator;
     private final UserInfo userInfo;
     private final SalaDAO salaDAO;
+    private final InstituicaoDAO instituicaoDAO;
 
     protected SalaController() {
-        this(null, null, null, null);
+        this(null, null, null, null, null);
     }
 
     @Inject
-    public SalaController(SalaDAO salaDAO, UserInfo userInfo, Result result, Validator validator) {
+    public SalaController(InstituicaoDAO instituicaoDAO, SalaDAO salaDAO, UserInfo userInfo, Result result, Validator validator) {
+        this.instituicaoDAO = instituicaoDAO;
         this.salaDAO = salaDAO;
         this.result = result;
         this.validator = validator;
@@ -52,20 +56,21 @@ public class SalaController {
         result.redirectTo(HomeController.class).login();
     }
 
-    @Get(value = {"/novo", "/editar/{id}"})
-    public Sala form(int id) {
-        return (id > 0) ? salaDAO.getById(id) : null;
+    @Get(value = {"/instituicao/{instituicaoId}/sala/novo", "/instituicao/{instituicaoId}/sala/editar/{salaId}"})
+    public Sala form(int instituicaoId, int salaId) {
+        result.include("instituicaoId", instituicaoId);
+        return (salaId > 0) ? salaDAO.getById(salaId) : null;
     }
     
-    @Get(value = {"", "/"})
-    public List<Sala> list() {
-        
-        return salaDAO.findAll();
+    @Get(value = {"/instituicao/{instituicaoId}/sala"})
+    public void list(int instituicaoId) {
+        Instituicao instituicao = instituicaoDAO.getById(instituicaoId);
+        result.include("instituicao", instituicao);
     }
     
-    @Get(value = {"/{id}"})
-    public Sala view(int id) {
-        return salaDAO.getById(id);
+    @Get(value = {"/instituicao/{instituicaoId}/sala/{salaId}"})
+    public Sala view(int salaId) {
+        return salaDAO.getById(salaId);
     }
 
     @Post
@@ -74,7 +79,8 @@ public class SalaController {
     }
 
     @IncludeParameters
-    public void save(@NotNull @Valid Sala sala) {
+    @Path(value = {"/instituicao/{instituicaoId}/sala/save"})
+    public void save(int instituicaoId, @NotNull @Valid Sala sala) {
         //if(person.getNome() == null || person.getNome().trim().equals(""))
         //validator.add(new SimpleMessage("nome", "O nome deve ser preenchido"));
         validator.onErrorForwardTo(this).form(sala);
@@ -86,18 +92,18 @@ public class SalaController {
         }
 
         // Redireciona para a página de listagem
-        result.redirectTo(SalaController.class).list();
+        result.redirectTo(SalaController.class).list(instituicaoId);
     }
     
-    @Get(value = {"/apagar/{id}"})
-    public Sala delete(int id) {
-        return salaDAO.getById(id);
+    @Get(value = {"/instituicao/{instituicaoId}/sala/delete/{salaId}"})
+    public Sala delete(int salaId) {
+        return salaDAO.getById(salaId);
     }
     
-    @Post(value = {"/apagar/{id}"})
-    public void delete(Sala sala) {
+    @Post(value = {"/instituicao/{instituicaoId}/sala/delete/{salaId}"})
+    public void delete(int instituicaoId, Sala sala) {
         salaDAO.delete(sala);
         
-        result.forwardTo(this.getClass()).list();
+        result.forwardTo(this.getClass()).list(instituicaoId);
     }
 }

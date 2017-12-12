@@ -6,8 +6,11 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,9 +27,12 @@ import javax.validation.constraints.NotNull;
 @Table(name = "tb_intituicao")
 public class Instituicao implements Serializable {
 
-    @OneToMany(mappedBy = "instituicao")
-    private List<Sala> salas;
+    @OneToMany(mappedBy = "instituicao", cascade = CascadeType.DETACH)
+    private Collection<Sala> salas;
 
+    @OneToMany(mappedBy = "instituicao", cascade = CascadeType.DETACH)
+    private Collection<Evento> eventos;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -39,6 +45,18 @@ public class Instituicao implements Serializable {
     
     @NotNull
     private String cnpj;
+
+    public Collection<Evento> getEventos() {
+        return eventos;
+    }
+
+    public void setEventos(Collection<Evento> eventos) {
+        this.eventos = eventos;
+    }
+    
+    public void AddEventos(Evento evento) {
+        this.eventos.add(evento);
+    }
 
     public int getId() {
         return id;
@@ -72,11 +90,11 @@ public class Instituicao implements Serializable {
         this.cnpj = cnpj;
     }
 
-    public List<Sala> getSalas() {
+    public Collection<Sala> getSalas() {
         return salas;
     }
 
-    public void setSalas(List<Sala> salas) {
+    public void setSalas(Collection<Sala> salas) {
         this.salas = salas;
     }
     

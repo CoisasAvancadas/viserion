@@ -6,10 +6,11 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -39,6 +40,7 @@ public class Evento implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
+    @Column(unique = true)
     private String nome;
     
     private String descricao;
@@ -46,22 +48,22 @@ public class Evento implements Serializable {
     @NotNull
     @Temporal(TemporalType.DATE)
     @Future
-    private Calendar dataInicio; 
+    private Date dataInicio; 
         
     @NotNull
     @Temporal(TemporalType.DATE)
     @Future
-    private Calendar dataFim;
+    private Date dataFim;
     
     @OneToMany
     private Collection<Usuario> responsavel;
     
-    @OneToMany(mappedBy = "evento", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "evento", cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     private Collection<Atividade> atividades;
     
     private boolean ativo;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH)
     private Instituicao instituicao;
 
     public boolean isAtivo() {
@@ -79,8 +81,6 @@ public class Evento implements Serializable {
     public void setInstituicao(Instituicao instituicao) {
         this.instituicao = instituicao;
     }
-    
-    
     
     @Lob
     private byte[] logo;
@@ -109,19 +109,19 @@ public class Evento implements Serializable {
         this.descricao = descricao;
     }
 
-    public Calendar getDataInicio() {
+    public Date getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(Calendar dataInicio) {
+    public void setDataInicio(Date dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public Calendar getDataFim() {
+    public Date getDataFim() {
         return dataFim;
     }
 
-    public void setDataFim(Calendar dataFim) {
+    public void setDataFim(Date dataFim) {
         this.dataFim = dataFim;
     }
 

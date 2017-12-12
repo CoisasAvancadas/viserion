@@ -21,7 +21,6 @@
                     <div class="form-group">
                         <label class="control-label" for="inputId">ID</label>
                         <input class="form-control" id="inputId" type="text" name="usuario.id" value="${usuario.id}" disabled readonly="readonly" />
-                        <input type="hidden" name="_method" value="PUT" />
                     </div>
                 </div>
                 </c:if>
@@ -44,7 +43,7 @@
         </div>
 
         <div class="row">
-            <div class="col s6">
+            <div class="col s4">
                 <div class="input-field ${not empty errors.from('usuario.nascimento') ? "has-danger" : ""}">
                     <label class="" for="inputnascimento"><fmt:message key="usuario.nascimento" /></label>
                     <input disabled class="datepicker" id="inputnascimento" type="text" name="usuario.nascimento" value="${usuario.nascimento}" />
@@ -52,12 +51,19 @@
                 <small class="form-control-feedback">${errors.from('usuario.nascimento')}</small>
             </div>
             
-            <div class="col s6">
+            <div class="col s4">
                 <div class="input-field ${not empty errors.from('usuario.password') ? "has-danger" : ""}">
                     <label class=""><fmt:message key="usuario.password" /></label>
                     <input disabled class="" type="password" name="usuario.password" value="${usuario.password}" describedby="inputPasswordStatus" />
                 </div>
                 <small class="form-control-feedback">${errors.from('usuario.password')}</small>
+            </div>
+            <div class="col s4">
+                <div class="input-field ${not empty errors.from('usuario.username') ? "has-danger" : ""}">
+                    <label class="" for="inputName"><fmt:message key="usuario.username" /></label>
+                    <input disabled class="" id="inputName" type="text" name="usuario.username" value="${usuario.username}" />
+                </div>
+                <small class="form-control-feedback">${errors.from('usuario.username')}</small>
             </div>
         </div>
 
