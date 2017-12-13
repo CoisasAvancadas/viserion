@@ -8,11 +8,19 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.interceptor.IncludeParameters;
+import br.com.caelum.vraptor.observer.upload.UploadedFile;
 import br.com.caelum.vraptor.validator.Validator;
 import dao.UsuarioDAO;
 import interceptor.Public;
 import interceptor.UserInfo;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import model.Usuario;
 import validation.LoginAvailable;
 import javax.validation.Valid;
@@ -73,9 +81,12 @@ public class UsuarioController {
     }
 
     @Path(value = {"/save"})
-    public void save(@NotNull @Valid Usuario usuario) {
+    public void save(@NotNull Usuario usuario) {
         //if(person.getNome() == null || person.getNome().trim().equals(""))
-        //validator.add(new SimpleMessage("nome", "O nome deve ser preenchido"));
+
+        //System.out.println(usuario.getFoto());
+        usuario.setFoto(null);
+
         validator.onErrorForwardTo(this).form(usuario);
 
         if (usuario.getId() > 0) {
@@ -99,4 +110,6 @@ public class UsuarioController {
         
         result.forwardTo(this.getClass()).list();
     }
+    
+    
 }

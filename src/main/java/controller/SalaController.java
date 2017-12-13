@@ -65,6 +65,8 @@ public class SalaController {
     @Get(value = {"/instituicao/{instituicaoId}/sala"})
     public void list(int instituicaoId) {
         Instituicao instituicao = instituicaoDAO.getById(instituicaoId);
+        instituicaoDAO.refresh(instituicao);
+
         result.include("instituicao", instituicao);
     }
     

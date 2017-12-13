@@ -1,9 +1,9 @@
 package model;
 
+import java.io.File;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -21,7 +20,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
@@ -65,7 +63,8 @@ public class Usuario implements Serializable {
     
     private String rg;
     
-    private Blob foto;
+    @Column(columnDefinition="mediumblob")
+    private File foto;
     
     @ManyToMany
     private Collection<RedeSocial> redesSociais = new ArrayList<>();
@@ -189,11 +188,11 @@ public class Usuario implements Serializable {
         this.rg = rg;
     }
 
-    public Blob getFoto() {
+    public File getFoto() {
         return foto;
     }
 
-    public void setFoto(Blob foto) {
+    public void setFoto(File foto) {
         this.foto = foto;
     }
 

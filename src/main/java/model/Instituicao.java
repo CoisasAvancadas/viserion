@@ -27,10 +27,10 @@ import javax.validation.constraints.NotNull;
 @Table(name = "tb_intituicao")
 public class Instituicao implements Serializable {
 
-    @OneToMany(mappedBy = "instituicao", cascade = CascadeType.DETACH)
+    @OneToMany(mappedBy = "instituicao", cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     private Collection<Sala> salas;
 
-    @OneToMany(mappedBy = "instituicao", cascade = CascadeType.DETACH)
+    @OneToMany(mappedBy = "instituicao", cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     private Collection<Evento> eventos;
     
     @Id

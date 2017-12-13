@@ -4,13 +4,13 @@
 <div class="page-header">
     <div class="row">
         <div class="col 12">
-            <h1><fmt:message key="sala" /> <small class="text-muted" style="text-transform: lowercase"><fmt:message key="register" /></small></h1>
+            <h1><fmt:message key="usuario" /> <small class="text-muted" style="text-transform: lowercase"><fmt:message key="register" /></small></h1>
         </div>
     </div>
 </div>
 
 <div class="row">
-    <form class="col s12" action="${linkTo[UsuarioController].save}" method="POST">
+    <form class="col s12" action="${linkTo[UsuarioController].save}" method="post" enctype="application/x-www-form-urlencoded">
         <c:if test="${not empty usuario and usuario.id > 0}">
             <input class="form-control" id="inputId" type="hidden" name="usuario.id" value="${usuario.id}" />
         </c:if>
@@ -79,10 +79,10 @@
             <div class="btn">
                 <span>Selecionar foto</span>
                 <input id="inputPictura" type="file">
-                <input type="hidden" name="usuario.foto" id="inputFoto">
+            <!--    <input id="inputFoto" type="text" name="usuario.foto"> --> 
             </div>
             <div class="file-path-wrapper">
-                <input  class="file-path validate" type="text">
+                <input class="file-path validate" type="text">
             </div>
         </div>
 
@@ -121,22 +121,21 @@
 //    
 //    
     function getBase64(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
-      });
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
     }
-$("#inputPictura").on("change", function() {
-    var file = document.getElementById('inputPictura').files[0];
-    getBase64(file).then(
-      data => console.log(data)
-    );
-    getBase64(file).then(
-      data => document.getElementById("inputFoto").value = (data)
-    );
-
-});
+    $("#inputPictura").on("change", function() {
+        var file = document.getElementById('inputPictura').files[0];
+        getBase64(file).then(
+            data => console.log(data)
+        );
+        getBase64(file).then(
+            data => document.getElementById("inputFoto").value = (data)
+        );
+    });
 
 </script>

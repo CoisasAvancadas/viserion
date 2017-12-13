@@ -14,7 +14,6 @@ import dao.AtividadeDAO;
 import dao.InstituicaoDAO;
 import interceptor.Public;
 import interceptor.UserInfo;
-import java.util.List;
 import model.Evento;
 import validation.LoginAvailable;
 import javax.validation.Valid;
@@ -72,6 +71,8 @@ public class EventoController {
     @Get(value = {"/instituicao/{InstituicaoId}/evento", "/instituicao/{InstituicaoId}/evento/"})
     public void list(int InstituicaoId) {
         Instituicao instituicao = instituicaoDAO.getById(InstituicaoId);
+        instituicaoDAO.refresh(instituicao);
+
         result.include("instituicao", instituicao);
         result.include("eventos", instituicao.getEventos());
     }
