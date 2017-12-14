@@ -111,5 +111,14 @@ public class UsuarioResource {
         dao.delete(x);
         result.nothing();
     }
+    
+    @Public 
+    public void login(Usuario usuario) {
+//        result.use(Results.json())
+//                .from(usuario)
+//                .
+
+        //createToken();
+    }
 
 }

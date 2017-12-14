@@ -41,6 +41,9 @@ public class AtividadeResource {
         result.use(Results.json())
                 .withoutRoot()
                 .from(dao.findAll())
+                .include("evento")
+                .include("tipoAtividade")
+                .include("sala")
                 .serialize();
     }
     
@@ -56,6 +59,9 @@ public class AtividadeResource {
             result.use(Results.json())
                 .withoutRoot()
                 .from(x)
+                .include("evento")
+                .include("tipoAtividade")
+                .include("sala")
                 .serialize();
         }
     }
@@ -71,6 +77,9 @@ public class AtividadeResource {
             result.use(Results.json())
                 .withoutRoot()
                 .from(Atividade)
+                .include("evento")
+                .include("tipoAtividade")
+                .include("sala")
                 .serialize();
         } catch (Exception e) {
             result.use(Results.status()).badRequest(e.getMessage());
@@ -93,6 +102,9 @@ public class AtividadeResource {
             result.use(Results.json())
                 .withoutRoot()
                 .from(Atividade)
+                .include("evento")
+                .include("tipoAtividade")
+                .include("sala")
                 .serialize();
         } catch (Exception e) {
             result.use(Results.status()).badRequest(e.getMessage());

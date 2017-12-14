@@ -40,6 +40,8 @@ public class EventoResource {
         result.use(Results.json())
                 .withoutRoot()
                 .from(dao.findAll())
+                .include("atividades")
+                .include("instituicao")
                 .serialize();
     }
 
@@ -55,6 +57,8 @@ public class EventoResource {
             result.use(Results.json())
                     .withoutRoot()
                     .from(x)
+                    .include("atividades")
+                    .include("instituicao")
                     .serialize();
         }
     }
@@ -70,6 +74,8 @@ public class EventoResource {
             result.use(Results.json())
                     .withoutRoot()
                     .from(Evento)
+                    .include("atividades")
+                    .include("instituicao")
                     .serialize();
         } catch (Exception e) {
             result.use(Results.status()).badRequest(e.getMessage());
@@ -92,6 +98,8 @@ public class EventoResource {
             result.use(Results.json())
                     .withoutRoot()
                     .from(Evento)
+                    .include("atividades")
+                    .include("instituicao")
                     .serialize();
         } catch (Exception e) {
             result.use(Results.status()).badRequest(e.getMessage());
