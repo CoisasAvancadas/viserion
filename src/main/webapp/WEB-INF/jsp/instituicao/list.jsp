@@ -30,6 +30,7 @@
                     <td><a class="dropdown-item btn btn-link" href="<c:url value="/instituicao/${item.id}/sala"/>"><fmt:message key="salas"/></a></td>
                     <td><a class="dropdown-item btn btn-link" href="<c:url value="/instituicao/${item.id}/evento"/>"><fmt:message key="eventos"/></a></td>
                     <td>
+                        <a class="dropdown-item btn btn-link" href="<c:url value="/instituicao/${item.id}"/>"><fmt:message key="view"/></a> 
                         <a class="dropdown-item btn btn-link" href="<c:url value="/instituicao/editar/${item.id}"/>"><fmt:message key="edit"/></a> 
                         <a class="dropdown-item btn btn-link" href="<c:url value="/instituicao/apagar/${item.id}"/>"><fmt:message key="delete"/></a> 
                     </td>

@@ -28,6 +28,7 @@
                     <td>${item.tipo}</td>
                     <td>${item.capacidade}</td>
                     <td>
+                        <a href="<c:url value="/instituicao/${instituicao.id}/sala/${item.id}"/>" class="dropdown-item btn btn-link"><fmt:message key="view"/></a> 
                         <a href="<c:url value="/instituicao/${instituicao.id}/sala/editar/${item.id}"/>" class="dropdown-item btn btn-link"><fmt:message key="edit"/></a> 
                         <a href="<c:url value="/instituicao/${instituicao.id}/sala/apagar/${item.id}"/>" class="dropdown-item btn btn-link"><fmt:message key="delete"/></a> 
                     </td>

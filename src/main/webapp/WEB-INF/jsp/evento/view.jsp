@@ -4,68 +4,71 @@
 <div class="page-header">
     <div class="row">
         <div class="col 12">
-            <h1><fmt:message key="atividade" /> <small class="text-muted" style="text-transform: lowercase"><fmt:message key="register" /></small></h1>
+            <h1><fmt:message key="evento" /> <small class="text-muted" style="text-transform: lowercase"><fmt:message key="register" /></small></h1>
         </div>
     </div>
 </div>
 
 <div class="row">
     <form class="col s12">
-        <c:if test="${not empty atividade and atividade.id > 0}">
-            <div class="col s12">
-                <div class="form-group">
-                    <label class="control-label" for="inputId">ID</label>
-                    <input class="form-control" id="inputId" type="text" name="atividade.id" value="${atividade.id}" disabled readonly="readonly" />
-                    <input type="hidden" name="_method" value="PUT" />
+        <div class="row">
+            <div class="col s8">
+                <div class="input-field ${not empty errors.from('evento.nome') ? "has-danger" : ""}">
+                    <label class="" for="inputName"><fmt:message key="evento.nome" /></label>
+                    <input disabled class="" id="inputName" type="text" name="evento.nome" value="${evento.nome}" />
                 </div>
+                <small class="form-control-feedback">${errors.from('evento.nome')}</small>
             </div>
-        </c:if>
-        <div class="col s12">
-            <div class="input-field ${not empty errors.from('atividade.nome') ? "has-danger" : ""}">
-                <label class="" for="inputName"><fmt:message key="atividade.nome" /></label>
-                <input disabled class="" id="inputName" type="text" name="atividade.nome" value="${atividade.nome}" />
+
+            <div class="col s4">
+                <div class="input-field ${not empty errors.from('evento.descricao') ? "has-danger" : ""}">
+                    <label class="" for="inputra"><fmt:message key="evento.descricao" /></label>
+                    <input disabled class="" id="inputra" type="text" name="evento.descricao" value="${evento.descricao}" />
+                </div>
+                <small class="form-control-feedback">${errors.from('evento.descricao')}</small>
             </div>
-            <small class="form-control-feedback">${errors.from('atividade.nome')}</small>
         </div>
 
         <div class="row">
             <div class="col s6">
-                <div class="input-field ${not empty errors.from('atividade.horaInicio') ? "has-danger" : ""}">
-                    <label class="" for="inputhoraInicio-date"><fmt:message key="atividade.horaInicio" /></label>
-                    <input disabled class="datetime" id="inputhoraInicio-date" type="text" value="${atividade.horaInicio}" />
+                <div class="input-field ${not empty errors.from('evento.dataInicio') ? "has-danger" : ""}">
+                    <label class="" for="inputdataInicio"><fmt:message key="evento.dataInicio" /></label>
+                    <input disabled class="datepicker" id="inputdataInicio" type="text" name="evento.dataInicio" value="${evento.dataInicio}" />
                 </div>
-                <small class="form-control-feedback">${errors.from('atividade.horaInicio')}</small>
+                <small class="form-control-feedback">${errors.from('evento.dataInicio')}</small>
             </div>
 
             <div class="col s6">
-                <div class="input-field ${not empty errors.from('atividade.horaInicio') ? "has-danger" : ""}">
-                    <label class="" for="inputhoraInicio-time"><fmt:message key="atividade.horaInicio" /></label>
-                    <input disabled class="timepicker" id="inputhoraInicio-time" type="text" value="${atividade.horaInicio}" />
+                <div class="input-field ${not empty errors.from('evento.dataFim') ? "has-danger" : ""}">
+                    <label class="" for="inputdataFim"><fmt:message key="evento.dataFim" /></label>
+                    <input disabled class="datepicker" id="inputdataFim" type="text" name="evento.dataFim" value="${evento.dataFim}" />
                 </div>
-                <small class="form-control-feedback">${errors.from('atividade.horaInicio')}</small>
+                <small class="form-control-feedback">${errors.from('evento.dataFim')}</small>
             </div>
-
-            <input type="datetime" name="atividade.horaInicio" value="${atividade.horaInicio}" style="display:none">
         </div>
-        
+
         <div class="row">
             <div class="col s6">
-                <div class="input-field ${not empty errors.from('atividade.horaFim') ? "has-danger" : ""}">
-                    <label class="" for="inputhoraFim-date"><fmt:message key="atividade.horaInicio" /></label>
-                    <input disabled class="datetime" id="inputhoraFim-date" type="text" value="${atividade.horaFim}" />
+                <div class="input-field ${not empty errors.from('evento.instituicao.id') ? "has-danger" : ""}">
+                    <select disabled name="evento.instituicao.id">
+                        <c:forEach items="${instituicoes}" var="instituicao">  
+                            <option value="${instituicao.id}">${instituicao.nome}</option>
+                        </c:forEach>  
+                    </select>
+                    <label><fmt:message key="evento.instituicao" /></label>
                 </div>
-                <small class="form-control-feedback">${errors.from('atividade.horaFim')}</small>
+                <small class="form-control-feedback">${errors.from('evento.instituicao')}</small>
             </div>
-
             <div class="col s6">
-                <div class="input-field ${not empty errors.from('atividade.horaFim') ? "has-danger" : ""}">
-                    <label class="" for="inputhoraFim-time"><fmt:message key="atividade.horaFim" /></label>
-                    <input disabled class="timepicker" id="inputhoraFim-time" type="text" value="${atividade.horaFim}" />
+                <div class="switch">
+                    <br>
+                    <label>
+                        <fmt:message key="evento.ativo" />
+                        <input disabled type="checkbox" name="evento.ativo">
+                        <span class="lever"></span>
+                    </label>
                 </div>
-                <small class="form-control-feedback">${errors.from('atividade.horaFim')}</small>
             </div>
-
-            <input type="datetime" name="atividade.horaFim" value="${atividade.horaFim}" style="display:none;">
         </div>
     </form>
 </div>

@@ -1,5 +1,7 @@
 package model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.io.File;
 import java.io.Serializable;
 import java.sql.Blob;
@@ -27,59 +29,76 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "tb_usuario")
+@ApiModel(value = "Usuario", description = "Classe de Pessoas que interagem com o sistema")
 public class Usuario implements Serializable {
 
     @ManyToMany
     private List<Atividade> atividades;
 
+    @ApiModelProperty(value = "Identificador da pessoa", required = true)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
+
+    @ApiModelProperty(value = "Número de cadastro da pessoa no sistema acadêmico da UTFPR", required = false)
     private String ra;
-    
+
+    @ApiModelProperty(value = "Nome da pessoa", required = true)
     @NotNull
     @Length(min = 3, max = 100)
     private String nome;
-    
+
+    @ApiModelProperty(value = "Data de Nascimento da Pessoa", required = false)
     @Temporal(TemporalType.DATE)
     @Past
     private Date nascimento;
-
+    
+    @ApiModelProperty(value = "Email da pessoa", required = false)
     @Column(unique = true)
     private String email;
-    
+
+    @ApiModelProperty(value = "Nome de usuario da pessoa", required = true)
     @Column(unique = true)
     @NotNull
     @Length(min = 3, max = 20)
     @Pattern(regexp = "[a-z0-9_]+", message = "{invalid_user}")
     private String username;
-    
+
+    @ApiModelProperty(value = "senha da pessoa", required = true)
     @NotNull
     @Length(min = 4, max = 100)
     private String password;
-    
+
+    @ApiModelProperty(value = "CPF da pessoa", required = false)
     private String cpf;
-    
+
+    @ApiModelProperty(value = "RG da pessoa", required = false)
     private String rg;
-    
+
+    @ApiModelProperty(value = "Foto da pessoa", required = false)
     private String foto;
-    
+
+    //@ApiModelProperty(value = "Redes sociais da pessoa", required = false)
     @ManyToMany
     private Collection<RedeSocial> redesSociais = new ArrayList<>();
-    
+
+    @ApiModelProperty(value = "Endereço da pessoa", required = false)
     @OneToOne()
     private Endereco endereco;
-    
+
+    @ApiModelProperty(value = "Currículo da pessoa", required = false)
     @OneToOne(cascade = CascadeType.ALL)
     private Curriculo curriculo;
-        
+
+    @ApiModelProperty(value = "Papel da pessoa", required = false)
     @ManyToOne
     private PapelSistema papel;
-    
+
+    @ApiModelProperty(value = "Lista de inscrições da pessoa", required = false)
     @OneToMany
     private Collection<InscricaoEvento> inscricaoEventos;
-    
+
+    @ApiModelProperty(value = "Lista de inscrições da pessoa em atividades", required = false)
     @OneToMany
     private Collection<InscricaoAtividade> inscricaoAtividades;
 
@@ -110,7 +129,7 @@ public class Usuario implements Serializable {
     public void addInscricaoEventos(InscricaoEvento inscricaoEvento) {
         this.inscricaoEventos.add(inscricaoEvento);
     }
-    
+
     public Collection<InscricaoAtividade> getInscricaoAtividades() {
         return inscricaoAtividades;
     }
@@ -118,11 +137,11 @@ public class Usuario implements Serializable {
     public void setInscricaoAtividades(Collection<InscricaoAtividade> inscricaoAtividades) {
         this.inscricaoAtividades = inscricaoAtividades;
     }
-    
+
     public void addInscricaoAtividades(InscricaoAtividade inscricaoAtividade) {
         this.inscricaoAtividades.add(inscricaoAtividade);
     }
-    
+
     public int getId() {
         return id;
     }
@@ -202,7 +221,7 @@ public class Usuario implements Serializable {
     public void setRedesSociais(Collection<RedeSocial> redesSociais) {
         this.redesSociais = redesSociais;
     }
-    
+
     public void addRedesSociais(RedeSocial redeSocial) {
         this.redesSociais.add(redeSocial);
     }
@@ -255,6 +274,5 @@ public class Usuario implements Serializable {
         p.setInscricaoEventos(this.inscricaoEventos);
         return p;
     }
-    
-    
+
 }

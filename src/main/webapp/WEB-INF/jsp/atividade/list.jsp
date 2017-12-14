@@ -22,6 +22,7 @@
                     <td>${item.id}</td>
                     <td>${item.nome}</td>
                     <td>
+                        <a href="<c:url value="/evento/${evento.id}/atividade/${item.id}"/>" class="dropdown-item btn btn-link"><fmt:message key="view"/></a> 
                         <a href="<c:url value="/evento/${evento.id}/atividade/editar/${item.id}"/>" class="dropdown-item btn btn-link"><fmt:message key="edit"/></a> 
                         <a href="<c:url value="/evento/${evento.id}/atividade/apagar/${item.id}"/>" class="dropdown-item btn btn-link"><fmt:message key="delete"/></a> 
                     </td>

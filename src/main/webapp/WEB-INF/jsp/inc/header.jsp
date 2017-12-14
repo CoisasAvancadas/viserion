@@ -6,7 +6,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="author" content="UTFPR - Câmpus Medianeira"/>
-        <meta name="reply-to" content="ricardosobjak@utfpr.edu.br"/>
         <meta name="description" content="<fmt:message key="meta.description"/>"/>
         <meta name="keywords" content="educacao, web, desenvolvimento, development, java, opensource"/>
         <title>Viserion</title>

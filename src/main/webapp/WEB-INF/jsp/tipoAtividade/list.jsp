@@ -24,6 +24,7 @@
                     <td>${item.id}</td>
                     <td>${item.nome}</td>
                     <td>
+                        <a href="<c:url value="/tipoatividade/${item.id}"/>" class="dropdown-item btn btn-link"><fmt:message key="view"/></a> 
                         <a href="<c:url value="/tipoatividade/editar/${item.id}"/>" class="dropdown-item btn btn-link"><fmt:message key="edit"/></a> 
                         <a href="<c:url value="/tipoatividade/apagar/${item.id}"/>" class="dropdown-item btn btn-link"><fmt:message key="delete"/></a> 
                     </td>

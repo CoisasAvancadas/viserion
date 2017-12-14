@@ -12,8 +12,8 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host": "localhost:8080",
-  "basePath": "webapp-vraptor-jwt/api",
+  "host": "localhost:8084/",
+  "basePath": "Viserion/api",
   "tags": [
     {
       "name": "pessoa",

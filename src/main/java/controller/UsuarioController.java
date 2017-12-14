@@ -87,11 +87,6 @@ public class UsuarioController {
     @Path(value = {"/save"})
     @UploadSizeLimit(sizeLimit=40 * 1024 * 1024, fileSizeLimit=10 * 1024 * 1024)
     public void save(Usuario usuario, UploadedFile photo) {
-        System.out.println("------------------------------------------------------------------------------------------AQUI CASSETA");
-        System.out.println("Usuario = " + usuario.getId() + " Nome=" + usuario.getNome() + "file "+ photo.getContentType() + photo.getFileName());
-        
-        System.out.println();
-        
         if (photo != null) {
             File dir = new File("files/");
 
@@ -107,9 +102,6 @@ public class UsuarioController {
             }
 
             usuario.setFoto(savedPhoto.getPath());
-
-            System.out.println(savedPhoto.getPath());
-            System.out.println("=============================================================================================AEHOOOOOOOOO");
         }
         
         validator.onErrorForwardTo(this).form(usuario);
@@ -151,4 +143,8 @@ public class UsuarioController {
         
         result.forwardTo(this.getClass()).list();
     }
+
+    @Public
+    @Get(value = {"/registrar"})
+    public void form() { }
 }

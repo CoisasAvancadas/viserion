@@ -10,8 +10,6 @@
             <div class="col l6 s12">
                 <h5 class="white-text">Viserion</h5>
                 <p class="grey-text text-lighten-4">Sistema de gerenciamento de eventos da UTFPR.</p>
-
-
             </div>
         </div>
     </div>

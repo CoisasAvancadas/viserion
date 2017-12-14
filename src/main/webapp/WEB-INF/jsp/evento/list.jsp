@@ -35,6 +35,7 @@
                         <a class="dropdown-item btn btn-link" href="<c:url value="/evento/${item.id}/atividade" />"> Atividades</a>
                     </td>
                     <td>
+                        <a href="<c:url value="/evento/${item.id}"/>" class="dropdown-item btn btn-link"><fmt:message key="view"/></a> 
                         <a href="<c:url value="/evento/editar/${item.id}"/>" class="dropdown-item btn btn-link"><fmt:message key="edit"/></a> 
                         <a href="<c:url value="/evento/apagar/${item.id}"/>" class="dropdown-item btn btn-link"><fmt:message key="delete"/></a> 
                     </td>

@@ -83,7 +83,7 @@
                             <option value="${papel.id}">${papel.nome}</option>
                         </c:forEach>  
                     </select>
-                    <label><fmt:message key="usuario.papel" /></label>
+                    <label><fmt:message key="papel" /></label>
                 </div>
                 <small class="form-control-feedback">${errors.from('usuario.papel')}</small>
             </div>
@@ -108,30 +108,3 @@
 
 <%@ include file="/WEB-INF/jsp/inc/footer.jsp" %> 
 <%@ include file="/WEB-INF/jsp/inc/scripts.jsp" %>
-
-<script>
-//    function getBase64(file) {
-//        var reader = new FileReader();
-//        reader.readAsDataURL(file);
-//        reader.onload = function () {
-//            console.log(reader.result);
-//            return reader.result;
-//        };
-//        reader.onerror = function (error) {
-//            console.log('Error: ', error);
-//            return null;
-//       };
-//    }
-//
-
-
-//    $("#inputPictura").on("change", function() {
-//        var file = document.getElementById('inputPictura').files[0];
-//        document.getElementById("inputFoto").value = getBase64(file); // prints the base64 string
-//    });
-//    
-//    
-//    
-    ÷
-
-</script>

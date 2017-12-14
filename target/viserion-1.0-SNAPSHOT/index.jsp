@@ -8,7 +8,15 @@
                     <h5 class="header col s12 light">Aplicação de eventos da UTFPR</h5>
                 </div>
                 <div class="row center">
-                    <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light orange">Get Started</a>
+                    <c:if test="${empty usuario}">
+                        <a href="<c:url value="/home/login"/>" id="download-button" class="btn-large waves-effect waves-light orange">Entrar</a>
+                        <a href="<c:url value="/usuario/registrar"/>" id="download-button" class="btn-large waves-effect waves-light orange">Inscrever-se</a>
+                    </c:if>
+                    <c:if test="${not empty usuario and usuario.id > 0}">
+                        <a href="<c:url value="/instituicao"/>" id="download-button" class="btn-large waves-effect waves-light orange">Insituições</a>
+                        <a href="<c:url value="/evento"/>" id="download-button" class="btn-large waves-effect waves-light orange">Eventos</a>
+                    </c:if>
+                </div>
                 </div>
             </div>
         </div>

@@ -58,7 +58,7 @@
                             <option value="${instituicao.id}">${instituicao.nome}</option>
                         </c:forEach>  
                     </select>
-                    <label>Materialize Select</label>
+                    <label><fmt:message key="evento.instituicao" /></label>
                 </div>
                 <small class="form-control-feedback">${errors.from('evento.instituicao')}</small>
             </div>

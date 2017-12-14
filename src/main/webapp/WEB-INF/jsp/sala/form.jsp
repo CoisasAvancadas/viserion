@@ -37,8 +37,8 @@
                 <small class="form-control-feedback">${errors.from('sala.capacidade')}</small>
             </div>
         </div>
-            <input type="hidden" value="${instituicaoId}" name="sala.instituicao.id">
-            
+        <input type="hidden" value="${instituicaoId}" name="sala.instituicao.id">
+
         <button type="submit" class="btn btn-primary">Salvar</button>
         <button type="reset" class="btn btn-flat">Resetar</button>
 
