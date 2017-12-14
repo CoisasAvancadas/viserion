@@ -34,7 +34,7 @@ public class EventoResource {
     private Result result;
 
     @Public
-    //@Logado
+    @Logado
     @Get(value = {"", "/"})
     public void all() {
         result.use(Results.json())
@@ -46,7 +46,7 @@ public class EventoResource {
     }
 
     @Public
-    //@Logado
+    @Logado
     @Get("{id}")
     public void one(int id) {
         Evento x = dao.getById(id);
@@ -64,7 +64,7 @@ public class EventoResource {
     }
 
     @Public
-    //@Logado
+    @Logado
     @Consumes("application/json")
     @Post(value = {"", "/"})
     public void add(Evento Evento) {
@@ -83,7 +83,7 @@ public class EventoResource {
     }
 
     @Public
-    //@Logado
+    @Logado
     @Consumes("application/json")
     @Put("{id}")
     public void update(Evento Evento, int id) {
@@ -107,7 +107,7 @@ public class EventoResource {
     }
 
     @Public
-    //@Logado
+    @Logado
     @Delete("{id}")
     public void delete(int id) {
         Evento x = dao.getById(id);

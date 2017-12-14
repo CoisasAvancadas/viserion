@@ -15,7 +15,7 @@ public class JWTUtil {
 
     private static final String SECRET = "my secret";
 
-    public static String createToken(Long userId) {
+    public static String createToken(int userId) {
         JWTSigner signer = new JWTSigner(SECRET);
 
         HashMap<String, Object> claims = new HashMap<String, Object>();

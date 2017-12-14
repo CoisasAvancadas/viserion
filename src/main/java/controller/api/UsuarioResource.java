@@ -15,10 +15,12 @@ import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.view.Results;
 import annotation.Logado;
+import static br.com.caelum.vraptor.view.Results.json;
 import dao.UsuarioDAO;
 import interceptor.Public;
 import model.Usuario;
 import javax.inject.Inject;
+import security.JWTUtil;
 
 /**
  *
@@ -34,7 +36,7 @@ public class UsuarioResource {
     private Result result;
 
     @Public
-    //@Logado
+    @Logado
     @Get(value = {"", "/"})
     public void all() {
         result.use(Results.json())
@@ -44,7 +46,7 @@ public class UsuarioResource {
     }
 
     @Public
-    //@Logado
+    @Logado
     @Get("{id}")
     public void one(int id) {
         Usuario x = dao.getById(id);
@@ -60,7 +62,7 @@ public class UsuarioResource {
     }
 
     @Public
-    //@Logado
+    @Logado
     @Consumes("application/json")
     @Post(value = {"", "/"})
     public void add(Usuario Usuario) {
@@ -77,7 +79,7 @@ public class UsuarioResource {
     }
 
     @Public
-    //@Logado
+    @Logado
     @Consumes("application/json")
     @Put("{id}")
     public void update(Usuario Usuario, int id) {
@@ -99,7 +101,7 @@ public class UsuarioResource {
     }
 
     @Public
-    //@Logado
+    @Logado
     @Delete("{id}")
     public void delete(int id) {
         Usuario x = dao.getById(id);
@@ -113,12 +115,14 @@ public class UsuarioResource {
     }
     
     @Public 
-    public void login(Usuario usuario) {
-//        result.use(Results.json())
-//                .from(usuario)
-//                .
-
-        //createToken();
+    public void auth(Usuario usuario) {
+        Usuario user = dao.find(usuario.getUsername(), usuario.getPassword());
+        if (user != null && user.getId() != 0) {
+            result.use(json()).from(JWTUtil.createToken(user.getId())).serialize();
+        } else {
+            result.notFound();
+            //result.use(json()).from("").serialize();
+        }
     }
 
 }

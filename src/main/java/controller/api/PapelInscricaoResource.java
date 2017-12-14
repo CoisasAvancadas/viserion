@@ -34,7 +34,7 @@ public class PapelInscricaoResource {
     private Result result;
 
     @Public
-    //@Logado
+    @Logado
     @Get(value = {"", "/"})
     public void all() {
         result.use(Results.json())
@@ -44,7 +44,7 @@ public class PapelInscricaoResource {
     }
 
     @Public
-    //@Logado
+    @Logado
     @Get("{id}")
     public void one(int id) {
         PapelInscricao x = dao.getById(id);
@@ -60,7 +60,7 @@ public class PapelInscricaoResource {
     }
 
     @Public
-    //@Logado
+    @Logado
     @Consumes("application/json")
     @Post(value = {"", "/"})
     public void add(PapelInscricao PapelInscricao) {
@@ -77,7 +77,7 @@ public class PapelInscricaoResource {
     }
 
     @Public
-    //@Logado
+    @Logado
     @Consumes("application/json")
     @Put("{id}")
     public void update(PapelInscricao PapelInscricao, int id) {
@@ -99,7 +99,7 @@ public class PapelInscricaoResource {
     }
 
     @Public
-    //@Logado
+    @Logado
     @Delete("{id}")
     public void delete(int id) {
         PapelInscricao x = dao.getById(id);
