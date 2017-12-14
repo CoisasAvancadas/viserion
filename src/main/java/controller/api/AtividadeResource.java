@@ -35,7 +35,7 @@ public class AtividadeResource {
     private Result result;
     
     @Public
-    @Logado
+    //@Logado
     @Get(value = {"", "/"})
     public void all() {
         result.use(Results.json())
@@ -45,7 +45,7 @@ public class AtividadeResource {
     }
     
     @Public
-    @Logado
+    //@Logado
     @Get("{id}")
     public void one(int id) {
         Atividade x = dao.getById(id);
@@ -61,7 +61,7 @@ public class AtividadeResource {
     }
     
     @Public
-    @Logado
+    //@Logado
     @Consumes("application/json")
     @Post(value = {"","/"})
     public void add(Atividade Atividade) {
@@ -78,7 +78,7 @@ public class AtividadeResource {
     }
     
     @Public
-    @Logado
+    //@Logado
     @Consumes("application/json")
     @Put("{id}")
     public void update(Atividade Atividade, int id) {
@@ -100,7 +100,7 @@ public class AtividadeResource {
     }
     
     @Public
-    @Logado
+    //@Logado
     @Delete("{id}")
     public void delete(int id) {
         Atividade x = dao.getById(id);
