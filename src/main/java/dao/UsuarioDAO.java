@@ -6,6 +6,7 @@
 
 package dao;
 
+import java.io.File;
 import model.Usuario;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.NoResultException;
@@ -38,6 +39,10 @@ public class UsuarioDAO extends GenericDAO<Integer, Usuario> {
         } catch (NoResultException e) {
             return null;
         }
+    }
+
+    public void assign(File savedPhoto, Usuario usuario) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

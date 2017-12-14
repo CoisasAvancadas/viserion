@@ -7,20 +7,21 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
-import br.com.caelum.vraptor.interceptor.IncludeParameters;
+import br.com.caelum.vraptor.observer.download.Download;
+import br.com.caelum.vraptor.observer.download.FileDownload;
+import br.com.caelum.vraptor.observer.upload.UploadSizeLimit;
 import br.com.caelum.vraptor.observer.upload.UploadedFile;
 import br.com.caelum.vraptor.validator.Validator;
 import dao.UsuarioDAO;
 import interceptor.Public;
 import interceptor.UserInfo;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 import model.Usuario;
 import validation.LoginAvailable;
 import javax.validation.Valid;
@@ -80,13 +81,53 @@ public class UsuarioController {
         return usuario;
     }
 
+//    @Path(value = {"/save"})
+//    public void save(@NotNull Usuario usuario) {
+//        //if(person.getNome() == null || person.getNome().trim().equals(""))
+//
+//        //System.out.println(usuario.getFoto());
+//        usuario.setFoto(null);
+//
+//        validator.onErrorForwardTo(this).form(usuario);
+//
+//        if (usuario.getId() > 0) {
+//            usuarioDAO.update(usuario);
+//        } else {
+//            usuarioDAO.save(usuario);
+//        }
+//
+//        // Redireciona para a página de listagem
+//        result.redirectTo(UsuarioController.class).list();
+//    }
+
     @Path(value = {"/save"})
-    public void save(@NotNull Usuario usuario) {
-        //if(person.getNome() == null || person.getNome().trim().equals(""))
+    @UploadSizeLimit(sizeLimit=40 * 1024 * 1024, fileSizeLimit=10 * 1024 * 1024)
+    public void save(Usuario usuario, UploadedFile photo) {
+        System.out.println("------------------------------------------------------------------------------------------AQUI CASSETA");
+        System.out.println("Usuario = " + usuario.getId() + " Nome=" + usuario.getNome() + "file "+ photo.getContentType() + photo.getFileName());
+        
+        System.out.println();
+        
+        if (photo != null) {
+            File dir = new File("files/");
 
-        //System.out.println(usuario.getFoto());
-        usuario.setFoto(null);
+            // create multiple directories at one time
+            boolean successful = dir.mkdirs();
+            File savedPhoto = new File("files", photo.getFileName());
+            System.out.println(savedPhoto.getAbsolutePath());
+            
+            try {
+                photo.writeTo(savedPhoto);
+            } catch (IOException ex) {
+                Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
+            usuario.setFoto(savedPhoto.getPath());
+
+            System.out.println(savedPhoto.getPath());
+            System.out.println("=============================================================================================AEHOOOOOOOOO");
+        }
+        
         validator.onErrorForwardTo(this).form(usuario);
 
         if (usuario.getId() > 0) {
@@ -97,6 +138,22 @@ public class UsuarioController {
 
         // Redireciona para a página de listagem
         result.redirectTo(UsuarioController.class).list();
+    }
+
+    @Get(value = {"/avatar/{usuarioId}"})
+    public Download avatar(int usuarioId) {
+        Usuario usuario = usuarioDAO.getById(usuarioId);
+
+        File file = new File(usuario.getFoto());
+        String contentType = "image/jpg";
+        String filename = usuario.getNome() + ".jpg";
+
+        try {
+            return new FileDownload(file, contentType, filename);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
     
     @Get(value = {"/apagar/{usuarioId}"})

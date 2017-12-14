@@ -36,7 +36,7 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    private int ra;
+    private String ra;
     
     @NotNull
     @Length(min = 3, max = 100)
@@ -63,8 +63,7 @@ public class Usuario implements Serializable {
     
     private String rg;
     
-    @Column(columnDefinition="mediumblob")
-    private File foto;
+    private String foto;
     
     @ManyToMany
     private Collection<RedeSocial> redesSociais = new ArrayList<>();
@@ -140,11 +139,11 @@ public class Usuario implements Serializable {
         this.nome = nome;
     }
 
-    public int getRa() {
+    public String getRa() {
         return ra;
     }
 
-    public void setRa(int ra) {
+    public void setRa(String ra) {
         this.ra = ra;
     }
 
@@ -188,11 +187,11 @@ public class Usuario implements Serializable {
         this.rg = rg;
     }
 
-    public File getFoto() {
+    public String getFoto() {
         return foto;
     }
 
-    public void setFoto(File foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 

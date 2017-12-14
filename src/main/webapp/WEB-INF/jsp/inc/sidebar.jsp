@@ -5,11 +5,11 @@
     <li>
         <div class="user-view">
             <div class="background">
-                <img src="<c:url value="/images/AHMED.jpg" />"/>
+                <img class="imagemSidebar" src="<c:url value="/images/landscape.jpg" />"/>
             </div>
-            <a href="#!user"><img class="circle" src="<c:url value="/images/AHMED.jpg" />"></a>
-            <a href="#!name"><span class="white-text name">${userInfo.usuario.nome}</span></a>
-            <a href="#!email"><span class="white-text email">${userInfo.usuario.email}</span></a>
+            <a href="#!user"><img class="circle" src="<c:url value="/usuario/avatar/${userInfo.usuario.id}"/>"></a>
+            <a href="#!name"><span class="white-text sidebar name">${userInfo.usuario.nome}</span></a>
+            <a href="#!email"><span class="white-text sidebar email">${userInfo.usuario.email}</span></a>
         </div>
     </li>
     

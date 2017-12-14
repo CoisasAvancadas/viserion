@@ -13,7 +13,7 @@
     <form class="col s12">
         <div class="row">
             <div class="col s4">
-                <img src="${usuario.foto}" alt="" style="width: 100%">
+                <img src="<c:url value="/usuario/avatar/${usuario.id}"/>" alt="${usuario.nome}" style="width: 100%">
             </div>
             <div class="col s8">
                 <c:if test="${not empty usuario and usuario.id > 0}">

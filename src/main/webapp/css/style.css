@@ -10,3 +10,20 @@
 .container {
     min-height: 25.8418741vw;
 }
+
+.imagemSidebar {
+    width: 100%;
+}
+
+span.white-text.sidebar {
+    text-shadow: 0 0 8px rgba(0,0,0,0.64);
+}
+
+.circle {
+    box-shadow: 0 0 16px rgba(0,0,0,0.32);
+}
+
+/* SAFARIAS */
+#sidenav-overlay {
+    -webkit-backdrop-filter: blur(32px) grayscale(50%);
+}
