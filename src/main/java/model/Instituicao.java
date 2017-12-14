@@ -40,7 +40,7 @@ public class Instituicao implements Serializable {
     @NotNull
     private String nome;
     
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Endereco endereco;
     
     @NotNull

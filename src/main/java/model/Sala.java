@@ -26,7 +26,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "tb_sala")
 public class Sala implements Serializable {
 
-    @OneToMany(mappedBy = "sala")
+    @OneToMany(mappedBy = "sala", cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     private List<Atividade> atividades;
 
     @Id

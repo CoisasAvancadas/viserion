@@ -55,7 +55,30 @@
                 <small class="form-control-feedback">${errors.from('atividade.horaFim')}</small>
             </div>
         </div>
-
+        <div class="row">
+            <div class="col s6">
+                <div class="input-field ${not empty errors.from('atividade.tipoAtividade.id') ? "has-danger" : ""}">
+                    <select disabled name="atividade.tipoAtividade.id" value="${atividade.tipoAtividade.id}">
+                        <c:forEach items="${tipoAtividades}" var="tipoAtividade">  
+                            <option value="${tipoAtividade.id}">${tipoAtividade.nome}</option>
+                        </c:forEach>  
+                    </select>
+                    <label><fmt:message key="atividade.tipoAtividade" /></label>
+                </div>
+                <small class="form-control-feedback">${errors.from('atividade.tipoAtividade')}</small>
+            </div>
+            <div class="col s6">
+                <div class="input-field ${not empty errors.from('atividade.sala.id') ? "has-danger" : ""}">
+                    <select disabled name="atividade.sala.id"  value="${atividade.sala.id}">
+                        <c:forEach items="${salas}" var="sala">
+                            <option value="${sala.id}">${sala.nome}</option>
+                        </c:forEach>  
+                    </select>
+                    <label><fmt:message key="atividade.sala" /></label>
+                </div>
+                <small class="form-control-feedback">${errors.from('atividade.sala')}</small>
+            </div>
+        </div>
     </form>
 </div>
 

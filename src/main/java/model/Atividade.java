@@ -56,10 +56,10 @@ public class Atividade implements Serializable {
     @ManyToMany(mappedBy = "atividades")
     private Collection<Usuario> palestrantes;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     private Sala sala;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     private TipoAtividade tipoAtividade;
 
     public Date getData() {

@@ -17,6 +17,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.view.Results;
 import annotation.Logado;
 import dao.AtividadeDAO;
+import interceptor.Public;
 import model.Atividade;
 import javax.inject.Inject;
 
@@ -33,6 +34,7 @@ public class AtividadeResource {
     @Inject
     private Result result;
     
+    @Public
     @Logado
     @Get(value = {"", "/"})
     public void all() {
@@ -42,6 +44,8 @@ public class AtividadeResource {
                 .serialize();
     }
     
+    @Public
+    @Logado
     @Get("{id}")
     public void one(int id) {
         Atividade x = dao.getById(id);
@@ -56,6 +60,8 @@ public class AtividadeResource {
         }
     }
     
+    @Public
+    @Logado
     @Consumes("application/json")
     @Post(value = {"","/"})
     public void add(Atividade Atividade) {
@@ -71,6 +77,8 @@ public class AtividadeResource {
         }
     }
     
+    @Public
+    @Logado
     @Consumes("application/json")
     @Put("{id}")
     public void update(Atividade Atividade, int id) {
@@ -91,6 +99,8 @@ public class AtividadeResource {
         }
     }
     
+    @Public
+    @Logado
     @Delete("{id}")
     public void delete(int id) {
         Atividade x = dao.getById(id);

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package controller.api;
 
 import br.com.caelum.vraptor.Consumes;
@@ -18,6 +17,7 @@ import br.com.caelum.vraptor.view.Results;
 import annotation.Logado;
 import dao.PapelAtividadeDAO;
 import dao.PapelDAO;
+import interceptor.Public;
 import model.PapelAtividade;
 import javax.inject.Inject;
 
@@ -33,7 +33,8 @@ public class PapelAtividadeResource {
     private PapelAtividadeDAO dao;
     @Inject
     private Result result;
-    
+
+    @Public
     @Logado
     @Get(value = {"", "/"})
     public void all() {
@@ -42,36 +43,42 @@ public class PapelAtividadeResource {
                 .from(dao.findAll())
                 .serialize();
     }
-    
+
+    @Public
+    @Logado
     @Get("{id}")
     public void one(int id) {
         PapelAtividade x = dao.getById(id);
-        
-        if(x == null) {
+
+        if (x == null) {
             result.notFound();
         } else {
             result.use(Results.json())
-                .withoutRoot()
-                .from(x)
-                .serialize();
+                    .withoutRoot()
+                    .from(x)
+                    .serialize();
         }
     }
-    
+
+    @Public
+    @Logado
     @Consumes("application/json")
-    @Post(value = {"","/"})
+    @Post(value = {"", "/"})
     public void add(PapelAtividade PapelAtividade) {
         try {
             dao.save(PapelAtividade);
             result.nothing();
             result.use(Results.json())
-                .withoutRoot()
-                .from(PapelAtividade)
-                .serialize();
+                    .withoutRoot()
+                    .from(PapelAtividade)
+                    .serialize();
         } catch (Exception e) {
             result.use(Results.status()).badRequest(e.getMessage());
         }
     }
-    
+
+    @Public
+    @Logado
     @Consumes("application/json")
     @Put("{id}")
     public void update(PapelAtividade PapelAtividade, int id) {
@@ -84,18 +91,20 @@ public class PapelAtividadeResource {
             dao.update(PapelAtividade);
             result.nothing();
             result.use(Results.json())
-                .withoutRoot()
-                .from(PapelAtividade)
-                .serialize();
+                    .withoutRoot()
+                    .from(PapelAtividade)
+                    .serialize();
         } catch (Exception e) {
             result.use(Results.status()).badRequest(e.getMessage());
         }
     }
-    
+
+    @Public
+    @Logado
     @Delete("{id}")
     public void delete(int id) {
         PapelAtividade x = dao.getById(id);
-        
+
         if (x == null) {
             result.notFound();
             return;

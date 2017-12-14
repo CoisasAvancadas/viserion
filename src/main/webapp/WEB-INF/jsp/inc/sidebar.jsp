@@ -30,7 +30,7 @@
                         <li><a href="<c:url value="/curriculo/novo" />"><i class="material-icons">add_box</i>Cadastrar</a></li>
                     </ul>
                 </div>
-            </li>
+            </li><!--
             <li class="bold"><a class="collapsible-header waves-effect waves-teal"><i class="material-icons">share</i>Redes sociais</a>
                 <div class="collapsible-body">
                     <ul>
@@ -38,7 +38,7 @@
                         <li><a href="<c:url value="/redesocial/novo" />"><i class="material-icons">add_box</i>Cadastrar</a></li>
                     </ul>
                 </div>
-            </li>
+            </li> -->
             
             <li><div class="divider"></div></li>
             <!--

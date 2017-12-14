@@ -12,6 +12,7 @@ import br.com.caelum.vraptor.observer.download.FileDownload;
 import br.com.caelum.vraptor.observer.upload.UploadSizeLimit;
 import br.com.caelum.vraptor.observer.upload.UploadedFile;
 import br.com.caelum.vraptor.validator.Validator;
+import dao.PapelDAO;
 import dao.UsuarioDAO;
 import interceptor.Public;
 import interceptor.UserInfo;
@@ -21,11 +22,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.ServletContext;
 import model.Usuario;
 import validation.LoginAvailable;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 @Controller
 @Path("/usuario")
@@ -35,13 +34,15 @@ public class UsuarioController {
     private final Validator validator;
     private final UserInfo userInfo;
     private final UsuarioDAO usuarioDAO;
+    private final PapelDAO papelDAO;
 
     protected UsuarioController() {
-        this(null, null, null, null);
+        this(null, null, null, null, null);
     }
 
     @Inject
-    public UsuarioController(UsuarioDAO usuarioDAO, UserInfo userInfo, Result result, Validator validator) {
+    public UsuarioController(PapelDAO papelDAO,UsuarioDAO usuarioDAO, UserInfo userInfo, Result result, Validator validator) {
+        this.papelDAO = papelDAO;
         this.usuarioDAO = usuarioDAO;
         this.result = result;
         this.validator = validator;
@@ -63,6 +64,7 @@ public class UsuarioController {
 
     @Get(value = {"/novo", "/editar/{usuarioId}"})
     public Usuario form(int usuarioId) {
+        result.include("papeis", papelDAO.findAll());
         return (usuarioId > 0) ? usuarioDAO.getById(usuarioId) : null;
     }
     
@@ -78,27 +80,9 @@ public class UsuarioController {
 
     @Post
     public Usuario form(Usuario usuario) {
+        result.include("papeis", papelDAO.findAll());
         return usuario;
     }
-
-//    @Path(value = {"/save"})
-//    public void save(@NotNull Usuario usuario) {
-//        //if(person.getNome() == null || person.getNome().trim().equals(""))
-//
-//        //System.out.println(usuario.getFoto());
-//        usuario.setFoto(null);
-//
-//        validator.onErrorForwardTo(this).form(usuario);
-//
-//        if (usuario.getId() > 0) {
-//            usuarioDAO.update(usuario);
-//        } else {
-//            usuarioDAO.save(usuario);
-//        }
-//
-//        // Redireciona para a página de listagem
-//        result.redirectTo(UsuarioController.class).list();
-//    }
 
     @Path(value = {"/save"})
     @UploadSizeLimit(sizeLimit=40 * 1024 * 1024, fileSizeLimit=10 * 1024 * 1024)
@@ -167,6 +151,4 @@ public class UsuarioController {
         
         result.forwardTo(this.getClass()).list();
     }
-    
-    
 }

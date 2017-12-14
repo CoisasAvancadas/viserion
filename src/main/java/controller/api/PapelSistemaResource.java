@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package controller.api;
 
 import br.com.caelum.vraptor.Consumes;
@@ -17,6 +16,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.view.Results;
 import annotation.Logado;
 import dao.PapelSistemaDAO;
+import interceptor.Public;
 import model.PapelSistema;
 import javax.inject.Inject;
 
@@ -32,7 +32,8 @@ public class PapelSistemaResource {
     private PapelSistemaDAO dao;
     @Inject
     private Result result;
-    
+
+    @Public
     @Logado
     @Get(value = {"", "/"})
     public void all() {
@@ -41,36 +42,42 @@ public class PapelSistemaResource {
                 .from(dao.findAll())
                 .serialize();
     }
-    
+
+    @Public
+    @Logado
     @Get("{id}")
     public void one(int id) {
         PapelSistema x = dao.getById(id);
-        
-        if(x == null) {
+
+        if (x == null) {
             result.notFound();
         } else {
             result.use(Results.json())
-                .withoutRoot()
-                .from(x)
-                .serialize();
+                    .withoutRoot()
+                    .from(x)
+                    .serialize();
         }
     }
-    
+
+    @Public
+    @Logado
     @Consumes("application/json")
-    @Post(value = {"","/"})
+    @Post(value = {"", "/"})
     public void add(PapelSistema PapelSistema) {
         try {
             dao.save(PapelSistema);
             result.nothing();
             result.use(Results.json())
-                .withoutRoot()
-                .from(PapelSistema)
-                .serialize();
+                    .withoutRoot()
+                    .from(PapelSistema)
+                    .serialize();
         } catch (Exception e) {
             result.use(Results.status()).badRequest(e.getMessage());
         }
     }
-    
+
+    @Public
+    @Logado
     @Consumes("application/json")
     @Put("{id}")
     public void update(PapelSistema PapelSistema, int id) {
@@ -83,18 +90,20 @@ public class PapelSistemaResource {
             dao.update(PapelSistema);
             result.nothing();
             result.use(Results.json())
-                .withoutRoot()
-                .from(PapelSistema)
-                .serialize();
+                    .withoutRoot()
+                    .from(PapelSistema)
+                    .serialize();
         } catch (Exception e) {
             result.use(Results.status()).badRequest(e.getMessage());
         }
     }
-    
+
+    @Public
+    @Logado
     @Delete("{id}")
     public void delete(int id) {
         PapelSistema x = dao.getById(id);
-        
+
         if (x == null) {
             result.notFound();
             return;

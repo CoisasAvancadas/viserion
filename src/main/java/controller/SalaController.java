@@ -13,7 +13,6 @@ import dao.InstituicaoDAO;
 import dao.SalaDAO;
 import interceptor.Public;
 import interceptor.UserInfo;
-import java.util.List;
 import model.Sala;
 import validation.LoginAvailable;
 import javax.validation.Valid;

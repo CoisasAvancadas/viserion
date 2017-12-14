@@ -63,6 +63,7 @@ public class EventoController {
         return (id > 0) ? eventoDAO.getById(id) : null;
     }
     
+    
     @Get(value = {"/evento", "/evento/"})
     public void list() {
         result.include("eventos", eventoDAO.findAll());
@@ -95,25 +96,13 @@ public class EventoController {
         //if(person.getNome() == null || person.getNome().trim().equals(""))
         //validator.add(new SimpleMessage("nome", "O nome deve ser preenchido"));
         validator.onErrorForwardTo(this).form(evento);
-
-        Evento eventoOld = eventoDAO.getById(evento.getId());
         
-        if (eventoOld != null) {
-            eventoOld = evento;
-            eventoDAO.update(eventoOld);
+        if (evento.getId() > 0) {
+            eventoDAO.update(evento);
         } else {
             eventoDAO.save(evento);
         }
         
-//        if (evento.getId() > 0) {
-//            eventoDAO.update(evento);
-//        } else {
-//            eventoDAO.save(evento);
-//            //Instituicao instituicao = instituicaoDAO.getById(evento.getInstituicao().getId());
-//            //instituicao.AddEventos(evento);
-//            //instituicaoDAO.update(instituicao);
-//        }
-
         // Redireciona para a página de listagem
         result.redirectTo(EventoController.class).list();
     }

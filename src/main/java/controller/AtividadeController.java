@@ -13,6 +13,10 @@ import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import dao.AtividadeDAO;
 import dao.EventoDAO;
+import dao.InstituicaoDAO;
+import dao.SalaDAO;
+import dao.TipoAtividadeDAO;
+import dao.UsuarioDAO;
 import interceptor.Public;
 import interceptor.UserInfo;
 import model.Atividade;
@@ -20,6 +24,7 @@ import validation.LoginAvailable;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import model.Evento;
+import model.Instituicao;
 
 @Controller
 @Path("/")
@@ -30,13 +35,22 @@ public class AtividadeController {
     private final UserInfo userInfo;
     private final AtividadeDAO atividadeDAO;
     private final EventoDAO eventoDAO;
+    private final TipoAtividadeDAO tipoDAO;
+    private final InstituicaoDAO instituicaoDAO;
+    private final UsuarioDAO usuarioDAO;
 
     protected AtividadeController() {
-        this(null, null, null, null, null);
+        this(null, null, null, null, null, null, null, null);
     }
 
     @Inject
-    public AtividadeController(AtividadeDAO atividadeDAO, EventoDAO eventoDAO, UserInfo userInfo, Result result, Validator validator) {
+    public AtividadeController(AtividadeDAO atividadeDAO, EventoDAO eventoDAO, 
+            UsuarioDAO usuarioDAO,
+            TipoAtividadeDAO tipoDAO, InstituicaoDAO instituicaoDAO,
+            UserInfo userInfo, Result result, Validator validator) {
+        this.usuarioDAO = usuarioDAO;
+        this.instituicaoDAO = instituicaoDAO;
+        this.tipoDAO = tipoDAO;
         this.eventoDAO = eventoDAO;
         this.atividadeDAO = atividadeDAO;
         this.result = result;
@@ -54,24 +68,45 @@ public class AtividadeController {
 
     @Get(value = {"/evento/{EventoId}/atividade/novo", "/evento/{EventoId}/atividade/editar/{AtividadeId}"})
     public Atividade form(int EventoId, int AtividadeId) {
+        Instituicao instituicao = eventoDAO.getById(EventoId).getInstituicao();
+        result.include("salas", instituicao.getSalas());
+        result.include("tipoAtividades", tipoDAO.findAll());
+        result.include("usuarios", usuarioDAO.findAll());
         result.include("EventoId", EventoId);
-        return (AtividadeId > 0) ? atividadeDAO.getById(AtividadeId) : null;
+        if (AtividadeId > 0) {
+            Atividade atividade = atividadeDAO.getById(AtividadeId);
+            atividadeDAO.refresh(atividade);
+            return atividade;
+        } else {
+            return null;
+        }
     }
     
     @AroundCall
     @Get(value = {"/evento/{EventoId}/atividade"})
     public void list(int EventoId) {
         Evento evento = eventoDAO.getById(EventoId);
+        
+        //Atualiza objeto para pegar novas atividades
+        eventoDAO.refresh(evento);
         result.include("evento", evento);
     }
     
     @Get(value = {"/evento/{EventoId}/atividade/{id}"})
     public Atividade view(int id) {
-        return atividadeDAO.getById(id);
+        Atividade atividade = atividadeDAO.getById(id);
+        atividadeDAO.refresh(atividade);
+        return atividade;
     }
 
     @Post(value = {"/evento/{EventoId}/atividade"})
-    public Atividade form(Atividade atividade) {
+    public Atividade form(int EventoId, Atividade atividade) {
+        Instituicao instituicao = eventoDAO.getById(EventoId).getInstituicao();
+        result.include("salas", instituicao.getSalas());
+        result.include("tipoAtividades", tipoDAO.findAll());
+        result.include("EventoId", EventoId);
+        result.include("usuarios", usuarioDAO.findAll());
+        atividadeDAO.refresh(atividade);
         return atividade;
     }
 
@@ -80,7 +115,7 @@ public class AtividadeController {
     public void save(int EventoId, @NotNull @Valid Atividade atividade) {
         //if(person.getNome() == null || person.getNome().trim().equals(""))
         //validator.add(new SimpleMessage("nome", "O nome deve ser preenchido"));
-        validator.onErrorForwardTo(this).form(atividade);
+        validator.onErrorForwardTo(this).form(EventoId, atividade);
         
         atividade.setEvento(eventoDAO.getById(EventoId));
 

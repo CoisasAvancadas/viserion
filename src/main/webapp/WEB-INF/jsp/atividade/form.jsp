@@ -50,6 +50,31 @@
             </div>
         </div>
         
+        <div class="row">
+            <div class="col s6">
+                <div class="input-field ${not empty errors.from('atividade.tipoAtividade.id') ? "has-danger" : ""}">
+                    <select name="atividade.tipoAtividade.id" value="${atividade.tipoAtividade.id}">
+                        <c:forEach items="${tipoAtividades}" var="tipoAtividade">  
+                            <option value="${tipoAtividade.id}" ${(atividade.tipoAtividade.id==tipoAtividade.id) ? "selected" : " "} >${tipoAtividade.nome}</option>
+                        </c:forEach>  
+                    </select>
+                    <label><fmt:message key="atividade.tipoAtividade" /></label>
+                </div>
+                <small class="form-control-feedback">${errors.from('atividade.tipoAtividade')}</small>
+            </div>
+            <div class="col s6">
+                <div class="input-field ${not empty errors.from('atividade.sala.id') ? "has-danger" : ""}">
+                    <select name="atividade.sala.id" value="${atividade.sala.id}">
+                        <c:forEach items="${salas}" var="sala">
+                            <option value="${sala.id}" ${(atividade.sala.id==sala.id) ? "selected" : " "} >${sala.nome}</option>
+                        </c:forEach>  
+                    </select>
+                    <label><fmt:message key="atividade.sala" /></label>
+                </div>
+                <small class="form-control-feedback">${errors.from('atividade.sala')}</small>
+            </div>
+        </div>
+       
         <input class="" id="inputEventoId" name="atividade.evento.id" type="hidden" value="${EventoId}" />
 
         <button type="submit" class="btn btn-primary">Salvar</button>
@@ -84,6 +109,9 @@
     $(".timepicker").on("change", function() {
         this.value = this.value + ":00";
     });
-  
+    
+    $(document).ready(function () {
+        $('select').material_select();
+    });
 
 </script>

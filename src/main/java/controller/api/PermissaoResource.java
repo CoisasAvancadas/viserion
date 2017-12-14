@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package controller.api;
 
 import br.com.caelum.vraptor.Consumes;
@@ -17,6 +16,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.view.Results;
 import annotation.Logado;
 import dao.PermissaoDAO;
+import interceptor.Public;
 import model.Permissao;
 import javax.inject.Inject;
 
@@ -32,7 +32,8 @@ public class PermissaoResource {
     private PermissaoDAO dao;
     @Inject
     private Result result;
-    
+
+    @Public
     @Logado
     @Get(value = {"", "/"})
     public void all() {
@@ -41,36 +42,42 @@ public class PermissaoResource {
                 .from(dao.findAll())
                 .serialize();
     }
-    
+
+    @Public
+    @Logado
     @Get("{id}")
     public void one(int id) {
         Permissao x = dao.getById(id);
-        
-        if(x == null) {
+
+        if (x == null) {
             result.notFound();
         } else {
             result.use(Results.json())
-                .withoutRoot()
-                .from(x)
-                .serialize();
+                    .withoutRoot()
+                    .from(x)
+                    .serialize();
         }
     }
-    
+
+    @Public
+    @Logado
     @Consumes("application/json")
-    @Post(value = {"","/"})
+    @Post(value = {"", "/"})
     public void add(Permissao Permissao) {
         try {
             dao.save(Permissao);
             result.nothing();
             result.use(Results.json())
-                .withoutRoot()
-                .from(Permissao)
-                .serialize();
+                    .withoutRoot()
+                    .from(Permissao)
+                    .serialize();
         } catch (Exception e) {
             result.use(Results.status()).badRequest(e.getMessage());
         }
     }
-    
+
+    @Public
+    @Logado
     @Consumes("application/json")
     @Put("{id}")
     public void update(Permissao Permissao, int id) {
@@ -83,18 +90,20 @@ public class PermissaoResource {
             dao.update(Permissao);
             result.nothing();
             result.use(Results.json())
-                .withoutRoot()
-                .from(Permissao)
-                .serialize();
+                    .withoutRoot()
+                    .from(Permissao)
+                    .serialize();
         } catch (Exception e) {
             result.use(Results.status()).badRequest(e.getMessage());
         }
     }
-    
+
+    @Public
+    @Logado
     @Delete("{id}")
     public void delete(int id) {
         Permissao x = dao.getById(id);
-        
+
         if (x == null) {
             result.notFound();
             return;

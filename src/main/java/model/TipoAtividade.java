@@ -7,7 +7,9 @@ package model;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +25,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "tb_tipo_atividade")
 public class TipoAtividade implements Serializable {
 
-    @OneToMany(mappedBy = "tipoAtividade")
+    @OneToMany(mappedBy = "tipoAtividade", cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     private List<Atividade> atividades;
 
     @Id

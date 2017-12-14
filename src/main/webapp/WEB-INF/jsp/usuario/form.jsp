@@ -22,7 +22,7 @@
                 </div>
                 <small class="form-control-feedback">${errors.from('usuario.nome')}</small>
             </div>
-            
+
             <div class="col s4">
                 <div class="input-field ${not empty errors.from('usuario.ra') ? "has-danger" : ""}">
                     <label class="" for="inputra"><fmt:message key="usuario.ra" /></label>
@@ -40,7 +40,7 @@
                 </div>
                 <small class="form-control-feedback">${errors.from('usuario.nascimento')}</small>
             </div>
-            
+
             <div class="col s4">
                 <div class="input-field ${not empty errors.from('usuario.password') ? "has-danger" : ""}">
                     <label class=""><fmt:message key="usuario.password" /></label>
@@ -65,7 +65,7 @@
                 </div>
                 <small class="form-control-feedback">${errors.from('usuario.cpf')}</small>
             </div>
-        
+
             <div class="col s6">
                 <div class="input-field ${not empty errors.from('usuario.rg') ? "has-danger" : ""}">
                     <label class="" for="inputrg"><fmt:message key="usuario.rg" /></label>
@@ -75,13 +75,28 @@
             </div>
         </div>
 
-        <div class="file-field input-field">
-            <div class="btn">
-                <span>Selecionar foto</span>
-                <input id="inputPictura" name="photo" type="file">
+        <div class="row">
+            <div class="col s6">
+                <div class="input-field ${not empty errors.from('usuario.papel.id') ? "has-danger" : ""}">
+                    <select name="usuario.papel.id">
+                        <c:forEach items="${papeis}" var="papel">
+                            <option value="${papel.id}">${papel.nome}</option>
+                        </c:forEach>  
+                    </select>
+                    <label><fmt:message key="usuario.papel" /></label>
+                </div>
+                <small class="form-control-feedback">${errors.from('usuario.papel')}</small>
             </div>
-            <div class="file-path-wrapper">
-                <input class="file-path validate" type="text">
+            <div class="col s6">
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>Selecionar foto</span>
+                        <input id="inputPictura" name="photo" type="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -117,6 +132,6 @@
 //    
 //    
 //    
-÷
+    ÷
 
 </script>
