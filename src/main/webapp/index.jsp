@@ -8,13 +8,14 @@
             <h5 class="header col s12 light">Aplicação de eventos da UTFPR</h5>
         </div>
         <div class="row center">
-            <c:if test="${empty usuario}">
+            <c:if test="${empty userInfo.usuario}">
                 <a href="<c:url value="/home/login"/>" id="download-button" class="btn-large waves-effect waves-light orange">Entrar</a>
                 <a href="<c:url value="/usuario/registrar"/>" id="download-button" class="btn-large waves-effect waves-light orange">Inscrever-se</a>
             </c:if>
-            <c:if test="${not empty usuario and usuario.id > 0}">
+            <c:if test="${not empty userInfo.usuario and userInfo.usuario.id > 0}">
                 <a href="<c:url value="/instituicao"/>" id="download-button" class="btn-large waves-effect waves-light orange">Insituições</a>
                 <a href="<c:url value="/evento"/>" id="download-button" class="btn-large waves-effect waves-light orange">Eventos</a>
+                <a href="<c:url value="/doc/index.html"/>" id="download-button" class="btn-large waves-effect waves-light orange">Documentação</a>
             </c:if>
         </div>
     </div>

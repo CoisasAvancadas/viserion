@@ -900,4 +900,4 @@ definitions:
         type: string
 externalDocs:
   description: Aplicação Vraptor
-  url: 'http://localhost:8084'  
+  url: 'http://localhost:8084/Viserion'  

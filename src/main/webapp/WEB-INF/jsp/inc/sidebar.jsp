@@ -22,7 +22,7 @@
                         <li><a href="<c:url value="/usuario/novo" />"><i class="material-icons">add_box</i>Cadastrar</a></li>
                     </ul>
                 </div>
-            </li>
+            </li><!--
             <li class="bold"><a class="collapsible-header waves-effect waves-teal"><i class="material-icons">description</i>Currículo</a>
                 <div class="collapsible-body">
                     <ul>
@@ -30,7 +30,7 @@
                         <li><a href="<c:url value="/curriculo/novo" />"><i class="material-icons">add_box</i>Cadastrar</a></li>
                     </ul>
                 </div>
-            </li><!--
+            </li>--><!--
             <li class="bold"><a class="collapsible-header waves-effect waves-teal"><i class="material-icons">share</i>Redes sociais</a>
                 <div class="collapsible-body">
                     <ul>
@@ -94,7 +94,7 @@
                         <li><a href="<c:url value="/papel/novo" />"><i class="material-icons">add_box</i>Cadastrar</a></li>
                     </ul>
                 </div>
-            </li>
+            </li><!--
             <li class="bold"><a class="collapsible-header waves-effect waves-teal"><i class="material-icons">assignment_ind</i>Permissões</a>
                 <div class="collapsible-body">
                     <ul>
@@ -102,8 +102,8 @@
                         <li><a href="<c:url value="/permissao/novo" />"><i class="material-icons">add_box</i>Cadastrar</a></li>
                     </ul>
                 </div>
-            </li>
-            
+            </li>-->
+            <!--
             <li><div class="divider"></div></li>
             
             <li class="bold"><a class="collapsible-header waves-effect waves-teal"><i class="material-icons">place</i>Endereços</a>
@@ -113,7 +113,7 @@
                         <li><a href="<c:url value="/endereco/novo" />"><i class="material-icons">add_box</i>Cadastrar</a></li>
                     </ul>
                 </div>
-            </li>
+            </li> -->
         </ul>
     </li>
 </ul>
